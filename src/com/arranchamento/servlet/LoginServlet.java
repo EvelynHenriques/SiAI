@@ -21,11 +21,11 @@ public class LoginServlet extends HttpServlet {
             // Se o usuário for encontrado e a senha estiver correta, crie uma sessão
             HttpSession session = request.getSession();
             session.setAttribute("usuarioLogado", usuario);
-            response.sendRedirect("menu"); // Redirecionar para a página do menu
+            response.sendRedirect("menu.jsp"); // Redirecionar para a página do menu
         } else {
             // Se a autenticação falhar, volte para a página de login com uma mensagem de erro
             request.setAttribute("erroLogin", "Email ou senha inválidos.");
-            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 }

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SiAI:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/SiAI_war2</output-path>
+    <root id="archive" name="SiAI_war.war">
+      <element id="artifact" artifact-name="SiAI:war exploded" />
+    </root>
+  </artifact>
+</component>
