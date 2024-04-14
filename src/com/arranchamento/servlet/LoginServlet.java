@@ -18,14 +18,14 @@ public class LoginServlet extends HttpServlet {
         Usuario usuario = usuarioDAO.buscarPorEmailESenha(email, password);
 
         if (usuario != null) {
-            // Sucesso no login
-            request.getSession().setAttribute("usuarioLogado", usuario);
-            response.sendRedirect("paginaInterna.jsp"); // Redireciona para página interna
+            // Se o usuário for encontrado e a senha estiver correta, crie uma sessão
+            HttpSession session = request.getSession();
+            session.setAttribute("usuarioLogado", usuario);
+            response.sendRedirect("menu"); // Redirecionar para a página do menu
         } else {
-            // Falha no login
-            request.setAttribute("mensagemErro", "Credenciais inválidas!");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/login.jsp");
-            dispatcher.forward(request, response);
+            // Se a autenticação falhar, volte para a página de login com uma mensagem de erro
+            request.setAttribute("erroLogin", "Email ou senha inválidos.");
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
     }
 }
