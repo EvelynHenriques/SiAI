@@ -12,29 +12,7 @@
             overflow: hidden;
             height: 100%;
         }
-        header {
-            background-color: #1e352e;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav {
-            background-color: #488273;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-            color: rgba(0, 0, 0, 0.5);
-        }
-        section {
-            padding: 20px;
-        }
+        <%@include file="/css/header.css"%>
 
         .imagem {
             position: fixed; /* Define a posição fixa para a imagem */
@@ -67,7 +45,7 @@
     <h1>Menu</h1>
 </header>
 <nav>
-    <a href="preencher_arranchamento.jsp">Preencher Arranchamento</a>
+    <a href="arranchamento.jsp">Preencher Arranchamento</a>
     <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
     <a href="extrair_arranchamento.jsp">Extrair Arranchamento</a>
 </nav>

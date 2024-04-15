@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World carol</title>
+    <title>SiAI</title>
 </head>
 <meta charset="UTF-8">
 <title>Login</title>
@@ -64,5 +64,4 @@
 </form>
 </body>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
 </html>

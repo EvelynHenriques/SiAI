@@ -16,6 +16,14 @@
         <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>ArranchamentoServlet</servlet-name>
+        <jsp-file>/arranchamento.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArranchamentoServlet</servlet-name>
+        <url-pattern>/arranchamento</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>arranchamento.servlet.LoginServlet</servlet-class>
     </servlet>

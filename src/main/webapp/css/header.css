@@ -1,0 +1,23 @@
+header {
+    background-color: #1e352e;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+nav {
+    background-color: #488273;
+    padding: 10px 0;
+    text-align: center;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 20px;
+}
+nav a:hover {
+    text-decoration: underline;
+    color: rgba(0, 0, 0, 0.5);
+}
+section {
+    padding: 20px;
+}

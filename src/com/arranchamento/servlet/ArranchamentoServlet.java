@@ -36,7 +36,7 @@ public class ArranchamentoServlet extends HttpServlet {
         // Exemplo de como você poderia recuperar dados do formulário:
         String tipoRefeicao = request.getParameter("tipoRefeicao");
         // Mais lógica para processar e armazenar o arranchamento
-
+        System.out.println("AQUI");
         // Após processar o arranchamento, você pode redirecionar para uma página de confirmação ou novamente para o menu:
         response.sendRedirect("menu");
     }
