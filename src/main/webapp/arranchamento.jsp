@@ -1,10 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: carol
-  Date: 14/04/2024
-  Time: 20:40
-  To change this template use File | Settings | File Templates.
---%>
+<%
+    // Verificando se o usuário está autenticado
+    session = request.getSession();
+    if (session == null || session.getAttribute("usuarioLogado") == null) {
+        // Usuário não autenticado, redireciona para a página de login
+        System.out.println("NAO LOGADO");
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>

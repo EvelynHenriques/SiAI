@@ -1,3 +1,14 @@
+<%
+    // Verificando se o usuário está autenticado
+    session = request.getSession();
+    if (session == null || session.getAttribute("usuarioLogado") == null) {
+        // Usuário não autenticado, redireciona para a página de login
+        System.out.println("NAO LOGADO");
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -48,6 +59,7 @@
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
     <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
     <a href="extrair_arranchamento.jsp">Extrair Arranchamento</a>
+    <a href="login.jsp">Sair</a>
 </nav>
 <section>
     <div class="imagem">

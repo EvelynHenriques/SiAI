@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ArranchamentoServlet", urlPatterns = {"/arrancha"})
+@WebServlet(name = "ArranchamentoServlet", urlPatterns = {"/arranchamento"})
 public class ArranchamentoServlet extends HttpServlet {
 
     private ArrancharService arrancharService;
@@ -32,11 +32,10 @@ public class ArranchamentoServlet extends HttpServlet {
             throws ServletException, IOException {
         // Aqui você trataria o envio do formulário de arranchamento.
         // Isto incluiria recuperar os dados do formulário, validar, e usar o ArrancharService para persistir os dados.
-
+        System.out.println("AQUI");
         // Exemplo de como você poderia recuperar dados do formulário:
         String tipoRefeicao = request.getParameter("tipoRefeicao");
         // Mais lógica para processar e armazenar o arranchamento
-        System.out.println("AQUI");
         // Após processar o arranchamento, você pode redirecionar para uma página de confirmação ou novamente para o menu:
         response.sendRedirect("menu");
     }

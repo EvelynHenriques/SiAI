@@ -17,7 +17,8 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ArranchamentoServlet</servlet-name>
-        <jsp-file>/arranchamento.jsp</jsp-file>
+        <!--<jsp-file>/arranchamento.jsp</jsp-file>-->
+        <servlet-class>arranchamento.servlet.ArranchamentoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ArranchamentoServlet</servlet-name>
