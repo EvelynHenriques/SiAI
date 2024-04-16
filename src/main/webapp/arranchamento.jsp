@@ -63,7 +63,8 @@
 <div class="card">
     <div class="day"><%= daysOfWeek[i] %></div>
     <% for (int j = 0; j < meals.length; j++) { %>
-    <div class="meal">
+    <div class="date">2024-04-30</div>
+    <div class="tipo">
         <input type="checkbox" id="<%= daysOfWeek[i] + meals[j] %>" name="<%= daysOfWeek[i] + meals[j] %>">
         <label for="<%= daysOfWeek[i] + meals[j] %>"><%= meals[j] %></label>
     </div>

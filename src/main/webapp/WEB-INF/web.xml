@@ -32,4 +32,13 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RefeicaoServlet</servlet-name>
+        <!--<jsp-file>/arranchamento.jsp</jsp-file>-->
+        <servlet-class>arranchamento.servlet.RefeicaoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RefeicaoServlet</servlet-name>
+        <url-pattern>/reficao</url-pattern>
+    </servlet-mapping>
 </web-app>

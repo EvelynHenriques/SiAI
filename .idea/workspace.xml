@@ -10,14 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/ArranchamentoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/ArranchamentoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/RefeicaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/RefeicaoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/menu.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -228,7 +225,7 @@
       <workItem from="1713033971204" duration="6113000" />
       <workItem from="1713041867483" duration="5406000" />
       <workItem from="1713111772569" duration="4652000" />
-      <workItem from="1713181339532" duration="1065000" />
+      <workItem from="1713181339532" duration="10213000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
