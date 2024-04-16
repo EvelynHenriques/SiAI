@@ -1,43 +1,71 @@
 package arranchamento.service;
 
 import arranchamento.dao.ArranchamentoDAO;
+import arranchamento.dao.RefeicaoDAO;
 import arranchamento.modelo.Arranchamento;
-import arranchamento.modelo.Usuario;
+import arranchamento.modelo.Refeicao;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.sql.SQLException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ArrancharService {
 
+    private RefeicaoDAO refeicaoDAO;
     private ArranchamentoDAO arranchamentoDAO;
+    private Map<Integer, String> tipoRefeicaoMap;
 
     public ArrancharService() {
-        arranchamentoDAO = new ArranchamentoDAO();
-        // O DAO deve ser instanciado aqui. Pode-se também usar injeção de dependência.
+        this.refeicaoDAO = new RefeicaoDAO();
+        this.arranchamentoDAO = new ArranchamentoDAO();
+        this.tipoRefeicaoMap = new HashMap<>();
+        tipoRefeicaoMap.put(1, "cafe");
+        tipoRefeicaoMap.put(2, "almoco");
+        tipoRefeicaoMap.put(3, "janta");
+        tipoRefeicaoMap.put(4, "ceia");
     }
 
-    public boolean arranchar(int usuario_id, int refeicao_id) {
-        // Validação dos dados de entrada
-        if (dadosValidos(usuario_id, refeicao_id)) {
-            // Criação de um novo objeto Arranchamento
-            Arranchamento arranchamento = new Arranchamento();
-            arranchamento.setUsuarioId(usuario_id);
-            arranchamento.setRefeicaoId(refeicao_id);
-
-            // Salvar no banco de dados usando o DAO
-            arranchamentoDAO.salvar(arranchamento);
-
-            // Retornar verdadeiro se o arranchamento foi bem sucedido
-            return true;
-        } else {
-            // Se os dados não forem válidos, retornar falso
-            return false;
+    public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId) {
+        if (datas.size() != indicesRefeicao.size()) {
+            // As listas devem ter o mesmo tamanho. Se não, há um erro.
+            throw new IllegalArgumentException("As listas de datas e índices de refeição devem ter o mesmo tamanho.");
         }
-    }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        for (int i = 0; i < datas.size(); i++) {
+            String dataStr = datas.get(i);
+            try {
+                Date dataUtil = sdf.parse(dataStr); // Converte a String para java.util.Date
+                java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime()); // Converte java.util.Date para java.sql.Date
 
-    private boolean dadosValidos(int usuario_id, int refeicao_id) {
-        // Implemente a lógica de validação aqui
-        // Isso pode incluir verificar se a data está no formato correto,
-        // se o tipo de refeição é um dos tipos aceitáveis, etc.
-        return true;
-    }
 
-    // Adicione outros métodos conforme necessário, como cancelar arranchamento, atualizar, etc.
+                Integer indiceRefeicao = indicesRefeicao.get(i);
+            String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
+
+            Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
+
+            Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId,refeicao.getId());
+                if (arranchamento != null) {
+                    arranchamentoDAO.atualizarArranchamento(arranchamento.getId());
+                    System.out.println("Refeição encontrada para a data " + dataSql + " e tipo " + tipoRefeicao);
+                } else {
+                    // Criar uma nova instância de Arranchamento antes de tentar definir valores
+                    arranchamento = new Arranchamento();
+                    arranchamento.setRefeicaoId(refeicao.getId());
+                    arranchamento.setUsuarioId(usuarioId);
+                    // Supondo que exista um método adicionarArranchamento que aceite um objeto Arranchamento
+                    arranchamentoDAO.adicionarArranchamento(arranchamento);
+                    System.out.println("Arranchamento adicionado para a data " + dataSql + " e tipo " + tipoRefeicao);
+                }
+        } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+    // Resto da implementação da classe...
+}
 }

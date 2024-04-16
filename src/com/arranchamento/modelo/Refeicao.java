@@ -5,13 +5,13 @@ import java.sql.Date;
 public class Refeicao {
     private int id;
     private String tipo;
-    private Date data; // A data em que a refeição será servida
+    private java.sql.Date data; // A data em que a refeição será servida
 
     // Construtores, getters e setters
     public Refeicao() {
     }
 
-    public Refeicao(int id, String tipo, Date data) {
+    public Refeicao(int id, String tipo, java.sql.Date data) {
         this.id = id;
         this.tipo = tipo;
         this.data = data;
@@ -34,11 +34,11 @@ public class Refeicao {
         this.tipo = tipo;
     }
 
-    public Date getData() {
+    public java.sql.Date getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(java.sql.Date data) {
         this.data = data;
     }
 

@@ -70,7 +70,7 @@
 </nav>
 <section>
     <div class="imagem">
-        <img src="e.jpg">
+        <img src="${pageContext.request.contextPath}/images/Captura%20de%20tela%202024-03-11%20083654.png"/>
     </div>
 
     <!-- Conteúdo da página vai aqui -->

@@ -1,11 +1,15 @@
 package arranchamento.servlet;
 
+import arranchamento.dao.ArranchamentoDAO;
+import arranchamento.modelo.Arranchamento;
 import arranchamento.service.ArrancharService;
 import arranchamento.modelo.Usuario;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "ArranchamentoServlet", urlPatterns = {"/arranchamento"})
 public class ArranchamentoServlet extends HttpServlet {
@@ -20,23 +24,53 @@ public class ArranchamentoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // A implementação dependerá de como você deseja processar e exibir a funcionalidade de arranchamento.
-        // Normalmente você recuperaria informações da sessão e mostraria a página ou formulário apropriado.
+        HttpSession session = request.getSession(false); // Recupera a sessão existente; não cria uma nova
+        if (session != null && session.getAttribute("usuarioId") != null) {
+            int usuarioId = (Integer) session.getAttribute("usuarioId");
 
-        // Por exemplo, mostrar um formulário para um novo arranchamento:
-        request.getRequestDispatcher("/WEB-INF/views/formArranchar.jsp").forward(request, response);
+            int refeicaoId = Integer.parseInt(request.getParameter("refeicaoId")); // Supõe que você passa o ID da refeição como parâmetro
+            ArranchamentoDAO arranchamentoDAO = new ArranchamentoDAO();
+            Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId, refeicaoId);
+
+            // Continue com a lógica de processamento usando 'arranchamento'
+        } else {
+            request.getRequestDispatcher("arranchamento.jsp").forward(request, response);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Aqui você trataria o envio do formulário de arranchamento.
-        // Isto incluiria recuperar os dados do formulário, validar, e usar o ArrancharService para persistir os dados.
+        HttpSession session = request.getSession(false); // Recupera a sessão existente; não cria uma nova
+        if (session == null || session.getAttribute("usuarioLogado") == null) {
+            response.sendRedirect("login.jsp"); // Redireciona para a página de login se não houver sessão ou se o usuárioId não estiver na sessão
+            return;
+        }
+
+        int usuarioId = (Integer) session.getAttribute("usuarioLogado"); // Agora seguro para acessar
+
+
         System.out.println("AQUI");
-        // Exemplo de como você poderia recuperar dados do formulário:
-        String tipoRefeicao = request.getParameter("tipoRefeicao");
-        // Mais lógica para processar e armazenar o arranchamento
-        // Após processar o arranchamento, você pode redirecionar para uma página de confirmação ou novamente para o menu:
-        response.sendRedirect("menu");
+
+        // Obtém todos os valores para o parâmetro "arranchamento"
+        String[] arranchamentos = request.getParameterValues("arranchamento");
+
+        // Listas para armazenar as datas e os índices das refeições
+        List<String> datas = new ArrayList<>();
+        List<Integer> indicesRefeicao = new ArrayList<>();
+
+        // Processa cada valor de "arranchamento" para extrair as datas e os índices das refeições
+        if (arranchamentos != null) {
+            for (String arranchamento : arranchamentos) {
+                // O formato esperado de cada arranchamento é "dd/MM/yyyy_i"
+                String[] partes = arranchamento.split("_");
+                if (partes.length == 2) {
+                    datas.add(partes[0]);
+                    indicesRefeicao.add(Integer.parseInt(partes[1])); // Converte o índice para Integer
+                }
+            }
+        }
+        ArrancharService arrancharService = new ArrancharService();
+        arrancharService.receberArranchamento(datas, indicesRefeicao, usuarioId);
     }
 }

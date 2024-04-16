@@ -11,7 +11,7 @@ import java.sql.Date;
 
 public class RefeicaoDAO {
 
-    public Refeicao buscarPorDataETipo(Date data, String tipo) {
+    public Refeicao buscarPorDataETipo(java.sql.Date data, String tipo) {
         Refeicao refeicao = null;
         String sql = "SELECT * FROM uhhdxfqg.public.refeicoes WHERE data = ? AND tipo = ?";
 

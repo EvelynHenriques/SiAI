@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
             // Se o usuário for encontrado e a senha estiver correta, crie uma sessão
             HttpSession session = request.getSession();
             System.out.println("Logado aqui");
-            session.setAttribute("usuarioLogado", usuario);
+            session.setAttribute("usuarioLogado", usuario.getId());
             response.sendRedirect("menu"); // Redirecionar para a página do menu
         } else {
             // Se a autenticação falhar, volte para a página de login com uma mensagem de erro

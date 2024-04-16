@@ -7,8 +7,8 @@ import java.sql.*;
 
 public class ArranchamentoDAO {
 
-    public boolean salvar(Arranchamento arranchamento) {
-        String sql = "INSERT INTO uhhdxfqg.public.arranchamentos (usuario_id, refeicao_id) VALUES (?, ?, ?)";
+    public boolean adicionarArranchamento(Arranchamento arranchamento) {
+        String sql = "INSERT INTO uhhdxfqg.public.arranchamentos (usuario_id, refeicao_id, updated_at) VALUES (?, ?, NOW())";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -32,5 +32,57 @@ public class ArranchamentoDAO {
         return false;
     }
 
-    // Outros métodos como buscar, atualizar, deletar arranchamentos, etc.
+    public boolean atualizarArranchamento(int arranchamentoId) {
+        String sql = "UPDATE uhhdxfqg.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            pstmt.setInt(1, arranchamentoId);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deletarArranchamento(int usuarioId, int refeicaoId) {
+        String sql = "DELETE FROM uhhdxfqg.public.arranchamentos WHERE usuario_id = ? AND refeicao_id = ?";
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioId);
+            pstmt.setInt(2, refeicaoId);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Arranchamento buscarArranchamentoPorUsuarioERefeicao(int usuarioId, int refeicaoId) {
+        String sql = "SELECT * FROM uhhdxfqg.public.arranchamentos WHERE usuario_id = ? AND refeicao_id = ?";
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioId);
+            pstmt.setInt(2, refeicaoId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Arranchamento arranchamento = new Arranchamento();
+                    arranchamento.setId(rs.getInt("id"));
+                    arranchamento.setUsuarioId(rs.getInt("usuario_id"));
+                    arranchamento.setRefeicaoId(rs.getInt("refeicao_id"));
+                    return arranchamento;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Retorna null se nenhum arranchamento for encontrado ou se ocorrer um erro
+    }
 }

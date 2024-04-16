@@ -31,4 +31,5 @@ public class Arranchamento {
     public void setRefeicaoId(int refeicaoId) {
         this.refeicaoId = refeicaoId;
     }
+
 }
