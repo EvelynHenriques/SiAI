@@ -1,9 +1,3 @@
-<% session = request.getSession(false); // Obtém a sessão atual, se existir
-    if (session != null) {
-        session.invalidate(); // Invalida a sessão, removendo todos os atributos associados a ela
-    }
-%>
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -46,16 +40,19 @@
     input[type="submit"] {
         background-color: #ffd700; /* amarelo */
         color: #1e352e; /* verde escuro */
-        padding: 10px 20px;
+        padding: 10px 128px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
     }
-
-    input[type="submit"]:hover {
+    a{
+        color:white;
+    }
+    input[type="submit"]:hover, a:hover {
         background-color: #ffea00; /* amarelo claro */
     }
+
 </style>
 </head>
 <body>
@@ -67,7 +64,9 @@
     <label for="password">Senha:</label><br>
     <input type="password" id="password" name="password"><br><br>
     <input type="submit" value="Entrar">
+    <p>Ainda não possui um cadastro?</p><a href="cadastro.jsp">Cadastrar</a>
 </form>
 </body>
 <br/>
+
 </html>

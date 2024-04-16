@@ -13,6 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Allerta Stencil' rel='stylesheet'>
     <title>Agenda de Refeições</title>
     <style>
         <%@include file="/css/header.css"%>
@@ -22,6 +23,7 @@
         body {
             height: 100%;
             margin: 0;
+            font-family: 'Allerta Stencil';
         }
         .card {
             border: 1px solid #ccc;
@@ -43,16 +45,24 @@
             justify-content: center;
             align-items: center;
         }
+        .menu{
+            font-size: 30px;
+            color:white;
+            text-decoration: none;
+            font-family: 'Allerta Stencil';
+        }
     </style>
 </head>
 <body>
 <header>
-    <h1>Menu</h1>
+    <a class="menu" href="menu.jsp">Menu</a>
+
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
     <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
     <a href="extrair_arranchamento.jsp">Extrair Arranchamento</a>
+    <a href="login.jsp">Sair</a>
 </nav>
 <%
     String[] daysOfWeek = {"Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"};
