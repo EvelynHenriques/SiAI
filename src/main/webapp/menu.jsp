@@ -1,8 +1,8 @@
 <%
     // Verificando se o usuário está autenticado
     session = request.getSession();
-    if (session == null || session.getAttribute("usuarioLogado") == null) {
-        // Usuário não autenticado, redireciona para a página de login
+        if (session == null || session.getAttribute("usuarioLogado") == null) {
+            // Usuário não autenticado, redireciona para a página de login
         System.out.println("NAO LOGADO");
         response.sendRedirect("login.jsp");
         return;
@@ -12,12 +12,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Allerta Stencil' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Allerta Stencil';
             margin: 0;
             padding: 0;
             overflow: hidden;
@@ -48,17 +49,23 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5); /* cor da sombra com 50% de opacidade */
         }
+        .menu{
+            font-size: 30px;
+            color:white;
+            text-decoration: none;
+            font-family: 'Allerta Stencil';
+        }
 
     </style>
 </head>
 <body>
 <header>
-    <h1>Menu</h1>
+    <a class="menu" href="menu.jsp">Menu</a>
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
     <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
-    <a href="extrair_arranchamento.jsp">Extrair Arranchamento</a>
+    <a href="exportar_arranchamento.jsp">Exportar Arranchamento</a>
     <a href="login.jsp">Sair</a>
 </nav>
 <section>
