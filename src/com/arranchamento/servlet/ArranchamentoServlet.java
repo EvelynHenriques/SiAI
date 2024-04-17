@@ -34,7 +34,7 @@ public class ArranchamentoServlet extends HttpServlet {
 
             // Continue com a lógica de processamento usando 'arranchamento'
         } else {
-            request.getRequestDispatcher("arranchamento.jsp").forward(request, response);
+            request.getRequestDispatcher("arranchamento").forward(request, response);
         }
     }
 

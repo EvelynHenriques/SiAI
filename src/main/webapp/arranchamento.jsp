@@ -48,36 +48,11 @@
 <html>
 <head>
     <title>Agenda de Refeições</title>
-    <style>
-        <%@include file="/css/header.css"%>
-        html {
-            height: 100vh;
-        }
-        body {
-            height: 100%;
-            margin: 0;
-        }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            float: left;
-        }
-        .day {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .meal {
-            margin-bottom: 3px;
-        }
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/arranchamento.css">
+        <style>
+            <%@include file="/css/header.css"%>
+            <%@include file="/css/arranchamento.css"%>
+        </style>
     <script>
         var nextMonday = new Date(); // Pega a data atual
         nextMonday.setDate(nextMonday.getDate() + ((1 + 7 - nextMonday.getDay()) % 7 || 7)); // Ajusta para a próxima segunda-feira
@@ -102,8 +77,25 @@
 
             return [day, month, year].join('/'); // Formato brasileiro dd/mm/yyyy
         }
+        var checkboxStates = {}; // Armazenar os estados das checkboxes
 
+        function saveCheckboxStates() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkboxStates[checkbox.id] = checkbox.checked;
+            });
+        }
+
+        function restoreCheckboxStates() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.id in checkboxStates) {
+                    checkbox.checked = checkboxStates[checkbox.id];
+                }
+            });
+        }
         function loadMoreWeeks(arranchadosMap) {
+            saveCheckboxStates();
             var daysOfWeek = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
             var meals = ["Café", "Almoço", "Janta", "Ceia"];
             var cardsDiv = document.querySelector('.cards');
@@ -126,17 +118,19 @@
             }
             cardsDiv.innerHTML += newContent;
             nextMonday = addDays(nextMonday, 7); // Prepara para o carregamento da próxima semana
+            restoreCheckboxStates();
         }
     </script>
 </head>
 <body>
 <header>
-    <h1>Menu</h1>
+    <a class="menu" href="menu.jsp">Menu</a>
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
     <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
-    <a href="extrair_arranchamento.jsp">Extrair Arranchamento</a>
+    <a href="exportar_arranchamento.jsp">Exportar Arranchamento</a>
+    <a href="login.jsp">Sair</a>
 </nav>
 <form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
     <%

@@ -54,20 +54,38 @@ public class ArrancharService {
             // As listas devem ter o mesmo tamanho. Se não, há um erro.
             throw new IllegalArgumentException("As listas de datas e índices de refeição devem ter o mesmo tamanho.");
         }
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date maiorData = null;
+
+        // Encontra a maior data entre as datas recebidas
+        for (String dataStr : datas) {
+            try {
+                Date dataUtil = sdf.parse(dataStr);
+                if (maiorData == null || dataUtil.after(maiorData)) {
+                    maiorData = dataUtil;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Deleta os arranchamentos do usuário até a maior data
+        deletarArranchamentosAteData(usuarioId, maiorData);
+
+        // Insere os novos arranchamentos recebidos
         for (int i = 0; i < datas.size(); i++) {
             String dataStr = datas.get(i);
             try {
                 Date dataUtil = sdf.parse(dataStr); // Converte a String para java.util.Date
                 java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime()); // Converte java.util.Date para java.sql.Date
 
-
                 Integer indiceRefeicao = indicesRefeicao.get(i);
-            String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
+                String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
 
-            Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
+                Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
 
-            Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId,refeicao.getId());
+                Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId, refeicao.getId());
                 if (arranchamento != null) {
                     arranchamentoDAO.atualizarArranchamento(arranchamento.getId());
                     System.out.println("Refeição encontrada para a data " + dataSql + " e tipo " + tipoRefeicao);
@@ -80,11 +98,15 @@ public class ArrancharService {
                     arranchamentoDAO.adicionarArranchamento(arranchamento);
                     System.out.println("Arranchamento adicionado para a data " + dataSql + " e tipo " + tipoRefeicao);
                 }
-        } catch (ParseException e) {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
-}
+    }
+
+    public boolean deletarArranchamentosAteData(int usuarioId, Date data) {
+        return arranchamentoDAO.deletarArranchamentosAteDataMaisQuatorzeDias(usuarioId, (java.sql.Date) data);
+    }
     public List<Arranchamento> buscarArranchamentosPorUsuario(int usuarioId) {
         return arranchamentoDAO.buscarArranchamentosPorUsuario(usuarioId);
     }
