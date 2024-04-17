@@ -27,26 +27,71 @@
         body {
             height: 100%;
             margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        .menu{
+            font-size: 30px;
+            color:white;
+            text-decoration: none;
+            font-family: 'Arial', sans-serif;
         }
         .card {
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 10px;
+
             margin: 10px;
             float: left;
         }
         .day {
             font-weight: bold;
             margin-bottom: 5px;
+            text-align: center; /* Alinha o texto ao centro */
+            background-color: #3d7272; /* Define a cor de fundo */
+            padding: 5px;
+            word-wrap: break-word;
         }
         .meal {
-            margin-bottom: 3px;
+            margin-bottom: 5px;
+
         }
         .cards {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             justify-content: center;
             align-items: center;
+        }
+        input[type="checkbox"] {
+            /* Tornar a checkbox invisível */
+            opacity: 0;
+            position: absolute;
+            vertical-align: middle;
+        }
+
+        input[type="checkbox"] + label {
+            /* Estilizar o rótulo que acompanha a checkbox */
+            display: inline-block;
+            vertical-align: middle; /* Alinhar verticalmente */
+            cursor: pointer; /* Mudar cursor para indicar clicabilidade */
+            position: relative; /* Permitir posicionamento absoluto do pseudo-elemento */
+            font-size: 18px;
+            padding-left: 10px;
+        }
+
+        input[type="checkbox"] + label::before {
+            /* Estilizar a caixa de seleção */
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background-color: transparent;
+            border: 1px solid #ccc; /* Manter a borda cinza */
+            border-radius: 5px; /* Arredondar as bordas */
+            margin-right: 5px; /* Adicionar espaçamento à direita */
+        }
+
+        input[type="checkbox"]:checked + label::before {
+            /* Alterar a cor de fundo quando selecionada */
+            background-color: #264d43; /* Verde quando selecionada */
         }
     </style>
     <script>
@@ -87,7 +132,7 @@
                 var currentDate = addDays(nextMonday, i);
                 var formattedDate = formatDate(currentDate); // Formatar a data
                 newContent += '<div class="card">' +
-                    '<div class="day">' + daysOfWeek[i] + ' (' + formattedDate + ')</div>';
+                    '<div class="day">' + daysOfWeek[i] + '<br>(' + formattedDate + ')</div>';
                 for (let j = 0; j < meals.length; j++) {
                     newContent += '<div class="meal">' +
                         '<input type="checkbox" id="' + formattedDate + '_' + (j+1) + '" name="arranchamento" value="' + formattedDate + '_' + (j+1) + '">' +
@@ -104,7 +149,7 @@
 </head>
 <body>
 <header>
-    <h1>Menu</h1>
+    <a class="menu" href="menu.jsp">Menu</a>
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
@@ -132,7 +177,7 @@
         String formattedDate = sdf.format(cal.getTime()); // Formatar data para padrão brasileiro
     %>
     <div class="card">
-        <div class="day"><%= daysOfWeek[i] %> (<%= formattedDate %>)</div>
+        <div class="day"><%= daysOfWeek[i] %><br>(<%= formattedDate %>)</div>
         <% for (int j = 0; j < meals.length; j++) { %>
         <div class="tipo">
             <input type="checkbox" id="day<%= i %>meal<%= j %>" name="arranchamento" value="<%= formattedDate %>_<%= j+1 %>">

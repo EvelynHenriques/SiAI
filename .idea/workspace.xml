@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="SiAI:war exploded" />
+      <artifact name="SiAi:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,7 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_04_2024_16_32__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_04_2024_16_32__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_04_2024_16_32__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_04_2024_16_32__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_04_2024_10_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_04_2024_10_20__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_04_2024_14_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_04_2024_14_27__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/menu.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,10 +135,11 @@
       </method>
     </configuration>
     <configuration name="Tomcat 9.0.87" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.87" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="SiAI:war exploded">
+        <artifact name="SiAi:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="" />
+            <option name="CONTEXT_PATH" value="/SiAi_war_exploded" />
           </settings>
         </artifact>
       </deployment>
@@ -208,7 +217,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="SiAI:war exploded" />
+          <artifact name="SiAi:war exploded" />
         </option>
       </method>
     </configuration>
@@ -240,6 +249,7 @@
       <workItem from="1713111772569" duration="4652000" />
       <workItem from="1713181339532" duration="10213000" />
       <workItem from="1713271887316" duration="3307000" />
+      <workItem from="1713313842323" duration="3994000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />

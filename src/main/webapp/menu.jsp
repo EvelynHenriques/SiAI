@@ -18,7 +18,7 @@
     <title>Menu</title>
     <style>
         body {
-            font-family: 'Allerta Stencil';
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             overflow: hidden;
@@ -53,7 +53,7 @@
             font-size: 30px;
             color:white;
             text-decoration: none;
-            font-family: 'Allerta Stencil';
+            font-family: 'Arial', sans-serif;
         }
 
     </style>
