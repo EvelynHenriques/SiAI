@@ -6,7 +6,8 @@ public class Arranchamento {
     private int id;
     private int usuarioId;
     private int refeicaoId;
-
+    private Date data;
+    private String tipoRefeicao;
     // Getters e setters
     public int getId() {
         return id;
@@ -32,4 +33,11 @@ public class Arranchamento {
         this.refeicaoId = refeicaoId;
     }
 
+    public Date getData() {return data;}
+
+    public void setData(Date data) {this.data = data;}
+
+    public String getTipoRefeicao() {return tipoRefeicao;}
+
+    public void setTipoRefeicao(String tipoRefeicao) {this.tipoRefeicao = tipoRefeicao;}
 }

@@ -1,18 +1,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Calendar"%>
+<%@ page import="arranchamento.service.ArrancharService" %>
+<%@ page import="arranchamento.modelo.Arranchamento" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.sql.Date" %>
 
 <%
 
     // Verificando se o usuário está autenticado
-    session = request.getSession();
-    if (session == null || session.getAttribute("usuarioLogado") == null) {
+    session = request.getSession(false);
+    Integer usuarioId = (Integer) session.getAttribute("usuarioLogado");
+    if (usuarioId == null) {
         // Usuário não autenticado, redireciona para a página de login
         System.out.println("NAO LOGADO");
         response.sendRedirect("login.jsp");
         return;
     }
+
+    ArrancharService arrancharService = new ArrancharService();
+    List<Arranchamento> arranchamentos = arrancharService.buscarArranchamentosPorUsuario(usuarioId);
+    Map<String, Boolean> arranchadosMap = new HashMap<>();
+    System.out.println("Arranchamentos encontrados: " + arranchamentos.size());
+
+    SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy"); // Formato de saída
+
+    for (Arranchamento arr : arranchamentos) {
+        Date date = arr.getData();
+        String formattedDate = sdfOutput.format(date);
+
+        // Obtendo o ID do tipo de refeição usando o método que adicionamos ao serviço
+        int tipoRefeicaoId = arrancharService.getRefeicaoIntTipo(arr.getTipoRefeicao());
+
+        // Usando o ID do tipo de refeição no lugar da string
+        String key = formattedDate + "_" + tipoRefeicaoId;
+
+        arranchadosMap.put(key, true);
+        System.out.println("Key added: " + key); // Debug #2
+    }
 %>
+
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -51,9 +80,8 @@
     </style>
     <script>
         var nextMonday = new Date(); // Pega a data atual
-        nextMonday.setDate(nextMonday.getDate() + ((1 + 7 - nextMonday.getDay()) % 7 || 7)); // Próxima segunda-feira
-        nextMonday.setDate(nextMonday.getDate() + 21); // Adiciona 7 dias para iniciar exatamente duas semanas à frente
-
+        nextMonday.setDate(nextMonday.getDate() + ((1 + 7 - nextMonday.getDay()) % 7 || 7)); // Ajusta para a próxima segunda-feira
+        nextMonday.setDate(nextMonday.getDate() + 21); // Começa daqui a duas semanas
 
         function addDays(date, days) {
             var result = new Date(date);
@@ -67,38 +95,37 @@
                 day = '' + d.getDate(),
                 year = d.getFullYear();
 
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
 
-            return [day, month, year].join('/'); // Alterado para o formato brasileiro
+            return [day, month, year].join('/'); // Formato brasileiro dd/mm/yyyy
         }
 
-        function loadMoreWeeks() {
+        function loadMoreWeeks(arranchadosMap) {
             var daysOfWeek = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
             var meals = ["Café", "Almoço", "Janta", "Ceia"];
             var cardsDiv = document.querySelector('.cards');
             var newContent = '';
-
-            if (new Date().getDay() !== 1) { // Se hoje não é segunda-feira
-                nextMonday.setDate(nextMonday.getDate() - (nextMonday.getDay() - 1)); // Ajustar para a última segunda-feira
-            }
-
-            for (let i = 0; i < 7; i++) { // Sempre começar na segunda-feira
+            for (let i = 0; i < 7; i++) {
                 var currentDate = addDays(nextMonday, i);
-                var formattedDate = formatDate(currentDate); // Formatar a data
+                var formattedDate = formatDate(currentDate);
                 newContent += '<div class="card">' +
-                    '<div class="day">' + daysOfWeek[i] + ' (' + formattedDate + ')</div>';
-                for (let j = 0; j < meals.length; j++) {
+                    '<div class="day">' + daysOfWeek[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1] + ' (' + formattedDate + ')</div>';
+                for (let j = 1; j <= meals.length; j++) {
+                    var checkboxValue = formattedDate + "_" + j;
+                    var isChecked = arranchadosMap.hasOwnProperty(checkboxValue) ? arranchadosMap[checkboxValue] : false;
+                    console.log(checkboxValue + isChecked)
                     newContent += '<div class="meal">' +
-                        '<input type="checkbox" id="' + formattedDate + '_' + (j+1) + '" name="arranchamento" value="' + formattedDate + '_' + (j+1) + '">' +
-                        '<label for="' + formattedDate + '_' + (j+1) + '">' + meals[j] + '</label>' +
+                        '<input type="checkbox" id="' + formattedDate + '_' + j + '" name="arranchamento" value="' + formattedDate + '_' + j + '"' + (isChecked ? ' checked' : '') + '>' +
+                        '<label for="' + formattedDate + '_' + j + '">' + meals[j-1] + '</label>' +
                         '</div>';
                 }
                 newContent += '</div>';
             }
-
-            cardsDiv.insertAdjacentHTML('beforeend', newContent);
-            nextMonday = addDays(nextMonday, 7); // Preparar para a próxima semana
+            cardsDiv.innerHTML += newContent;
+            nextMonday = addDays(nextMonday, 7); // Prepara para o carregamento da próxima semana
         }
     </script>
 </head>
@@ -114,38 +141,71 @@
 <form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
     <%
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Formato brasileiro
-
-        // Ajustar para a segunda-feira de duas semanas à frente
-        cal.add(Calendar.WEEK_OF_YEAR, 2);
-        int currentDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-        int daysUntilNextMonday = Calendar.MONDAY - currentDayOfWeek;
-        if (daysUntilNextMonday <= 0) { // Se já é segunda-feira ou domingo
-            daysUntilNextMonday += 7; // Adicionar uma semana
-        }
-        cal.add(Calendar.DAY_OF_MONTH, daysUntilNextMonday);
+        cal.add(Calendar.DATE, 14); // Move calendar to two weeks from now
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY); // Set to start of the next coming Monday
 
         String[] daysOfWeek = {"Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"};
         String[] meals = {"Café", "Almoço", "Janta", "Ceia"};
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Use the output format
+
+        for (int i = 0; i < 7; i++) {
+            String formattedDate = sdf.format(cal.getTime());
     %>
-    <% for (int i = 0; i < 7; i++) {
-        String formattedDate = sdf.format(cal.getTime()); // Formatar data para padrão brasileiro
-    %>
-    <div class="card">
+    <div class="card" id="card<%= i %>">
         <div class="day"><%= daysOfWeek[i] %> (<%= formattedDate %>)</div>
-        <% for (int j = 0; j < meals.length; j++) { %>
-        <div class="tipo">
-            <input type="checkbox" id="day<%= i %>meal<%= j %>" name="arranchamento" value="<%= formattedDate %>_<%= j+1 %>">
-            <label for="day<%= i %>meal<%= j %>"><%= meals[j] %></label>
-        </div>
-        <% } %>
     </div>
     <% cal.add(Calendar.DATE, 1); %>
     <% } %>
 </form>
+
+<script>
+    var arranchadosMap = <%= convertMapToJson(arranchadosMap) %>; // Convert Java map to JavaScript object
+
+    var daysOfWeek = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
+    var meals = ["Café", "Almoço", "Janta", "Ceia"];
+
+    for (var i = 0; i < 7; i++) {
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + ((1 + 7 - currentDate.getDay()) % 7 || 7)); // Adjust to next Monday
+        currentDate.setDate(currentDate.getDate() + 14 + i); // Start from two weeks from now
+
+        var formattedDate = (currentDate.getDate() < 10 ? '0' : '') + currentDate.getDate() + "/" + (currentDate.getMonth() < 9 ? '0' : '') + (currentDate.getMonth() + 1) + "/" + currentDate.getFullYear();
+
+        var card = document.getElementById('card' + i);
+        var cardContent = '<div class="day">' + daysOfWeek[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1] + ' (' + formattedDate + ')</div>';
+
+        for (var j = 1; j <= meals.length; j++) {
+            var checkboxValue = formattedDate + "_" + j;
+            var isChecked = arranchadosMap.hasOwnProperty(checkboxValue) && arranchadosMap[checkboxValue];
+
+            cardContent += '<div class="meal">' +
+                '<input type="checkbox" id="day' + i + 'meal' + j + '" name="arranchamento" value="' + checkboxValue + '" ' + (isChecked ? 'checked' : '') + '>' +
+                '<label for="day' + i + 'meal' + j + '">' + meals[j - 1] + '</label>' +
+                '</div>';
+        }
+
+        card.innerHTML = cardContent;
+    }
+</script>
+
 <div class="button-container">
-    <button type="button" onclick="loadMoreWeeks()">Exibir mais</button>
+    <button type="button" onclick="loadMoreWeeks(arranchadosMap);">Exibir mais</button>
     <button type="submit" form="arranchamentoForm">Enviar</button>
 </div>
 </body>
 </html>
+<%!
+    private String convertMapToJson(Map<String, Boolean> arranchadosMap) {
+        StringBuilder json = new StringBuilder("{");
+        for (Map.Entry<String, Boolean> entry : arranchadosMap.entrySet()) {
+            String key = entry.getKey();
+            boolean value = entry.getValue();
+            json.append("\"").append(key).append("\":").append(value).append(",");
+        }
+        if (!arranchadosMap.isEmpty()) {
+            json.deleteCharAt(json.length() - 1); // Remove a vírgula extra no final
+        }
+        json.append("}");
+        return json.toString();
+    }
+%>

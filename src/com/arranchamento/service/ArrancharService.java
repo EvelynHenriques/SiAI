@@ -19,6 +19,7 @@ public class ArrancharService {
     private RefeicaoDAO refeicaoDAO;
     private ArranchamentoDAO arranchamentoDAO;
     private Map<Integer, String> tipoRefeicaoMap;
+    private Map<String, Integer> tipoRefeicaoToIntMap;
 
     public ArrancharService() {
         this.refeicaoDAO = new RefeicaoDAO();
@@ -28,6 +29,24 @@ public class ArrancharService {
         tipoRefeicaoMap.put(2, "almoco");
         tipoRefeicaoMap.put(3, "janta");
         tipoRefeicaoMap.put(4, "ceia");
+        getTipoRefeicaoToIntMap();
+    }
+
+    public static Map<String, Integer> getTipoRefeicaoToIntMap() {
+        Map<String, Integer> refeicaoToInt = new HashMap<>();
+        refeicaoToInt.put("cafe", 1);
+        refeicaoToInt.put("almoco", 2);
+        refeicaoToInt.put("janta", 3);
+        refeicaoToInt.put("ceia", 4);
+        return refeicaoToInt;
+    }
+    public int getRefeicaoIntTipo(String tipoRefeicao) {
+        Map<String, Integer> tipoRefeicaoToInt = getTipoRefeicaoToIntMap();
+        Integer tipoRefeicaoId = tipoRefeicaoToInt.get(tipoRefeicao.toLowerCase());
+        if (tipoRefeicaoId == null) {
+            throw new IllegalArgumentException("Tipo de refeição desconhecido: " + tipoRefeicao);
+        }
+        return tipoRefeicaoId;
     }
 
     public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId) {
@@ -65,7 +84,8 @@ public class ArrancharService {
                 e.printStackTrace();
             }
         }
-
-    // Resto da implementação da classe...
 }
+    public List<Arranchamento> buscarArranchamentosPorUsuario(int usuarioId) {
+        return arranchamentoDAO.buscarArranchamentosPorUsuario(usuarioId);
+    }
 }
