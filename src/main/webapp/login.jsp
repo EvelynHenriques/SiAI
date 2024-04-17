@@ -1,3 +1,16 @@
+<%
+    String cadastroConcluido = (String) request.getAttribute("cadastroConcluido");
+    if (cadastroConcluido != null) {
+%>
+<script>
+    alert("<%= cadastroConcluido %>");
+</script>
+<%
+    }
+
+    session.invalidate(); // Invalida a sessão, removendo todos os atributos associados a ela
+%>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -66,6 +79,16 @@
     <input type="submit" value="Entrar">
     <p>Ainda não possui um cadastro?</p><a href="cadastro.jsp">Cadastrar</a>
 </form>
+<%
+    String erroLogin = (String) request.getAttribute("erroLogin");
+    if (erroLogin != null) {
+%>
+<script>
+    alert("<%= erroLogin %>");
+</script>
+<%
+    }
+%>
 </body>
 <br/>
 

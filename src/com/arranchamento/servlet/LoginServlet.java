@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             // Se a autenticação falhar, volte para a página de login com uma mensagem de erro
             request.setAttribute("erroLogin", "Email ou senha inválidos.");
-            request.getRequestDispatcher("login").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 }

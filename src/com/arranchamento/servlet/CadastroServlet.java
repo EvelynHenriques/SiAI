@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "cadastroServlet", value = "/cadastroServlet")
+@WebServlet(name = "CadastroServlet", value = "/cadastro")
 public class CadastroServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,7 +24,10 @@ public class CadastroServlet extends HttpServlet {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         if(usuarioDAO.buscarPorEmailEMatricula(email, matricula) && usuarioDAO.inserirUsuario(usuario)){
             System.out.println("Usuario cadastrado");
-            response.sendRedirect("login.jsp"); // Redirecionar para a página do menu
+            //HttpSession session = request.getSession();
+            request.setAttribute("cadastroConcluido", "Cadastro concluído com sucesso. Prossiga para o login");
+            //response.sendRedirect("login.jsp"); // Redirecionar para a página do menu
+            request.getRequestDispatcher("login.jsp").forward(request, response);
 
         } else {
             System.out.println("Erro no cadastro");

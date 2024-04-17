@@ -34,4 +34,12 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CadastroServlet</servlet-name>
+        <servlet-class>arranchamento.servlet.CadastroServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CadastroServlet</servlet-name>
+        <url-pattern>/cadastro</url-pattern>
+    </servlet-mapping>
 </web-app>

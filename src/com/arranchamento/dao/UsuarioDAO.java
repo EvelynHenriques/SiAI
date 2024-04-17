@@ -50,13 +50,14 @@ public class UsuarioDAO {
                 usuario.setId(rs.getInt("id"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setEmail(rs.getString("email"));
+                return false;
                 // Não definir a senha por motivos de segurança
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Tratamento de exceção ou log
         }
-        return usuario == null;
+        return true;
     }
 
     public boolean inserirUsuario(Usuario usuario){
