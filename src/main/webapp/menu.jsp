@@ -26,6 +26,34 @@
     <style>
         <%@include file="/css/header.css"%>
         <%@include file="/css/menu.css"%>
+        section {
+            text-align: center;
+            max-width: 30%;
+            margin: auto;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #1e352e;
+            border-radius: 10px;
+            animation: blink 0.5s infinite;
+
+        }
+
+        section h1 {
+            color: #f3ecd6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes blink {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            }
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -33,12 +61,22 @@
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 5px;
             text-align: left;
         }
-        th {
-            background-color: #f2f2f2;
+        td{
+            font-family: "Times New Roman",sans-serif;;
         }
+        th {
+            background-color:#488273;
+        }
+        #shadow-host-companion {
+            display: none;
+        }
+        tbody tr td:nth-child(2) {
+            width: 50px;
+        }
+
     </style>
 </head>
 <body>

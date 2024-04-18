@@ -1,10 +1,9 @@
-
 body {
-    background-color: #f1f1f1;
+    background-color: #8ea492;
     font-family: Arial, sans-serif;
 }
 form {
-    background-color: #fff;
+    background-color: #f5f0e1;
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -29,6 +28,7 @@ input[type="password"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    background-color: #f8f4e7;
 }
 input[type="submit"] {
     width: 100%;
@@ -54,8 +54,8 @@ a {
 a:hover {
     text-decoration: underline;
 }
-#form input::placeholder{
-    color:lightgray;
+input::placeholder {
+    color: #b6b6b6;
 }
 #loader {
     width: 12px;
@@ -63,7 +63,7 @@ a:hover {
     border-radius: 50%;
     animation: l5 1s infinite linear alternate;
     position: absolute; /* Posiciona o loader de forma absoluta */
-    top: 80%; /* Posiciona o loader no centro verticalmente */
+    top: 78%; /* Posiciona o loader no centro verticalmente */
     left: 50%; /* Posiciona o loader no centro horizontalmente */
     transform: translate(-50%, -50%);
     margin-top: 10px;
