@@ -1,3 +1,14 @@
+<%
+// Verificando se o usuário está autenticado
+session = request.getSession(false);
+Integer usuarioId = (Integer) session.getAttribute("usuarioLogado");
+if (usuarioId == null) {
+// Usuário não autenticado, redireciona para a página de login
+System.out.println("NAO LOGADO");
+response.sendRedirect("login.jsp");
+return;
+}
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>

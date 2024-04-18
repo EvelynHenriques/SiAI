@@ -1,3 +1,13 @@
+<% // Verificando se o usuário está autenticado
+session = request.getSession(false);
+Integer usuarioId = (Integer) session.getAttribute("usuarioLogado");
+if (usuarioId == null) {
+// Usuário não autenticado, redireciona para a página de login
+System.out.println("NAO LOGADO");
+response.sendRedirect("login.jsp");
+return;
+}
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +33,7 @@
     <a href="login.jsp">Sair</a>
 </nav>
 <section>
-    <form method="post" action="processarFormulario.jsp">
+    <form method="post" action="export">
         <label for="dataInicio">Data de Início:</label>
         <input type="text" id="dataInicio" name="dataInicio" required>
         <br><br>
