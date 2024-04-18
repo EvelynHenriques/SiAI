@@ -42,7 +42,6 @@
     }
 %>
 
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -173,7 +172,7 @@
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
-    <a href="exportar.jsp">Extrair Arranchamento</a>
+    <a href="exportar.jsp">Exportar Arranchamento</a>
 </nav>
 <form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
     <input type="hidden" id="lastDateDisplayed" name="lastDateDisplayed" value="" />
