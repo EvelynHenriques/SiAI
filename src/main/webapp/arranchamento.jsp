@@ -199,11 +199,6 @@
         </div>
         <% } %>
     </div>
-    <% if (i == 6) { %>
-    <div class="button-container">
-        <button type="button" onclick="extendAll();">Estender para todos</button>
-    </div>
-    <% } %>
     <% cal.add(Calendar.DATE, 1); %>
     <% } %>
 </form>

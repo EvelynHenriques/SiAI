@@ -7,13 +7,15 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "CadastroServlet", value = "/cadastro")
 public class CadastroServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String password = hashSenhaDIFERENTE(request.getParameter("password"));
         String nome = request.getParameter("nome");
         String nomeDeGuerra = request.getParameter("nome_guerra");
         int matricula = Integer.parseInt(request.getParameter("matricula"));
@@ -33,6 +35,25 @@ public class CadastroServlet extends HttpServlet {
             System.out.println("Erro no cadastro");
             request.setAttribute("erroCadastro", "Erro ao cadastrar usuário. Verifique se os dados estão corretos.");
             request.getRequestDispatcher("cadastro.jsp").forward(request, response);
+        }
+    }
+
+    private String hashSenhaDIFERENTE(String senha) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(senha.getBytes());
+            StringBuilder hexString = new StringBuilder();
+
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
