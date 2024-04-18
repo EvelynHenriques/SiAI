@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

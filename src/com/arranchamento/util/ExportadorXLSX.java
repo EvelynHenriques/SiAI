@@ -4,6 +4,7 @@ import arranchamento.util.ConexaoBanco;
 import arranchamento.util.DateUtil;
 
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
@@ -332,14 +333,12 @@ public class ExportadorXLSX {
 
             int colNum = 1;
             for (String data : datas) {
-                headerRow.createCell(colNum).setCellValue("cafe");
-                firstRow.createCell(colNum++).setCellValue(data);
-                headerRow.createCell(colNum).setCellValue("almoco");
-                firstRow.createCell(colNum++).setCellValue(data);
-                headerRow.createCell(colNum).setCellValue("janta");
-                firstRow.createCell(colNum++).setCellValue(data);
-                headerRow.createCell(colNum).setCellValue("ceia");
-                firstRow.createCell(colNum++).setCellValue(data);
+                firstRow.createCell(colNum).setCellValue(data);
+                sheet.addMergedRegion(new CellRangeAddress(0, 0, colNum, colNum+3));
+                headerRow.createCell(colNum++).setCellValue("cafe");
+                headerRow.createCell(colNum++).setCellValue("almoco");
+                headerRow.createCell(colNum++).setCellValue("janta");
+                headerRow.createCell(colNum++).setCellValue("ceia");
             }
 
             for (Map.Entry<String, Map<String, List<String>>> entry : dados.entrySet()) {
@@ -384,6 +383,6 @@ public class ExportadorXLSX {
         return false;
     }
     public static void main(String[] args) {
-        exportTeste(System.getProperty("user.home") + "/Downloads/" + "/DADOS",25,2, "06/05/2024", "10/05/2024");
+        exportarFormatado(System.getProperty("user.home") + "/Downloads/" + "/DADOS",25,2, "06/05/2024", "10/05/2024");
     }
 }
