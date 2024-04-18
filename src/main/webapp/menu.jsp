@@ -18,7 +18,7 @@
     <title>Menu</title>
     <style>
         body {
-            font-family: 'Allerta Stencil';
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             overflow: hidden;
@@ -53,7 +53,7 @@
             font-size: 30px;
             color:white;
             text-decoration: none;
-            font-family: 'Allerta Stencil';
+            font-family: 'Arial', sans-serif;
         }
 
     </style>
@@ -64,8 +64,7 @@
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
-    <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
-    <a href="exportar_arranchamento.jsp">Exportar Arranchamento</a>
+    <a href="exportar.jsp">Exportar Arranchamento</a>
     <a href="login.jsp">Sair</a>
 </nav>
 <section>

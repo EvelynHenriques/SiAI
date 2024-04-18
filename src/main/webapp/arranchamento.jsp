@@ -173,9 +173,7 @@
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
-    <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
-    <a href="exportar_arranchamento.jsp">Exportar Arranchamento</a>
-    <a href="login.jsp">Sair</a>
+    <a href="exportar.jsp">Extrair Arranchamento</a>
 </nav>
 <form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
     <input type="hidden" id="lastDateDisplayed" name="lastDateDisplayed" value="" />
