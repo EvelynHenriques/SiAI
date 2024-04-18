@@ -153,8 +153,7 @@
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
-    <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
-    <a href="extrair_arranchamento.jsp">Extrair Arranchamento</a>
+    <a href="exportar.jsp">Extrair Arranchamento</a>
 </nav>
 <form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
     <%
