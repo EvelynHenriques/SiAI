@@ -35,6 +35,37 @@ public class ArranchamentoDAO {
         return false;
     }
 
+    public boolean adicionarArranchamentos(List<Arranchamento> arranchamentos) {
+        String sql = "INSERT INTO uhhdxfqg.public.arranchamentos (usuario_id, refeicao_id, updated_at) VALUES (?, ?, NOW())";
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            for (Arranchamento arranchamento : arranchamentos) {
+                pstmt.setInt(1, arranchamento.getUsuarioId());
+                pstmt.setInt(2, arranchamento.getRefeicaoId());
+                pstmt.addBatch(); // Adiciona a operação ao lote
+            }
+
+            int[] affectedRows = pstmt.executeBatch();
+            for (int i = 0; i < affectedRows.length; i++) {
+                if (affectedRows[i] > 0) {
+                    // O arranchamento foi salvo com sucesso
+                    try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            arranchamentos.get(i).setId(generatedKeys.getInt(1));
+                        }
+                    }
+                }
+            }
+            return true;
+        } catch (SQLException e) {
+            // Log e tratamento de exceção adequado
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     public boolean atualizarArranchamento(int arranchamentoId) {
         String sql = "UPDATE uhhdxfqg.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
         try (Connection conexao = ConexaoBanco.obterConexao();

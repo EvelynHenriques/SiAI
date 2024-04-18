@@ -15,9 +15,9 @@ public class ExportadorXLSX {
 
     public static boolean exportarParaXLSX(String nomeArquivo, int turma, int pelotao, String dataInicio, String dataFim) {
         String sql = "SELECT usr.nome_de_guerra AS NOME_DE_GUERRA, ref.tipo AS REFEICAO, ref.data AS DATA\n" +
-                "FROM uhhdxfqg.public.arranchamentos arr\n" +
-                "JOIN uhhdxfqg.public.usuarios usr ON arr.usuario_id = usr.id\n" +
-                "JOIN uhhdxfqg.public.refeicoes ref ON arr.refeicao_id = ref.id\n" +
+                "FROM arranchamentos arr\n" +
+                "JOIN usuarios usr ON arr.usuario_id = usr.id\n" +
+                "JOIN refeicoes ref ON arr.refeicao_id = ref.id\n" +
                 "WHERE usr.turma = ? AND usr.pelotao = ? AND ref.data >= ? AND ref.data <= ?";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
