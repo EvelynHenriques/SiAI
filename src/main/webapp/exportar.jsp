@@ -56,8 +56,12 @@ return;
 <!-- Script para inicializar o date picker -->
 <script>
     $( function() {
-        $( "#dataInicio" ).datepicker();
-        $( "#dataFim" ).datepicker();
+        $( "#dataInicio" ).datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+        $( "#dataFim" ).datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
     } );
 
     // Função para mostrar o loader assim que a página é carregada
