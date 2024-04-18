@@ -21,78 +21,7 @@
     <title>Agenda de Refeições</title>
     <style>
         <%@include file="/css/header.css"%>
-        html {
-            height: 100vh;
-        }
-        body {
-            height: 100%;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-        }
-        .menu{
-            font-size: 30px;
-            color:white;
-            text-decoration: none;
-            font-family: 'Arial', sans-serif;
-        }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-
-            margin: 10px;
-            float: left;
-        }
-        .day {
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-align: center; /* Alinha o texto ao centro */
-            background-color: #3d7272; /* Define a cor de fundo */
-            padding: 5px;
-            word-wrap: break-word;
-        }
-        .meal {
-            margin-bottom: 5px;
-
-        }
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            justify-content: center;
-            align-items: center;
-        }
-        input[type="checkbox"] {
-            /* Tornar a checkbox invisível */
-            opacity: 0;
-            position: absolute;
-            vertical-align: middle;
-        }
-
-        input[type="checkbox"] + label {
-            /* Estilizar o rótulo que acompanha a checkbox */
-            display: inline-block;
-            vertical-align: middle; /* Alinhar verticalmente */
-            cursor: pointer; /* Mudar cursor para indicar clicabilidade */
-            position: relative; /* Permitir posicionamento absoluto do pseudo-elemento */
-            font-size: 18px;
-            padding-left: 10px;
-        }
-
-        input[type="checkbox"] + label::before {
-            /* Estilizar a caixa de seleção */
-            content: '';
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            background-color: transparent;
-            border: 1px solid #ccc; /* Manter a borda cinza */
-            border-radius: 5px; /* Arredondar as bordas */
-            margin-right: 5px; /* Adicionar espaçamento à direita */
-        }
-
-        input[type="checkbox"]:checked + label::before {
-            /* Alterar a cor de fundo quando selecionada */
-            background-color: #264d43; /* Verde quando selecionada */
-        }
+        <%@include file="/css/arranchamento.css"%>
     </style>
     <script>
         var nextMonday = new Date(); // Pega a data atual
@@ -153,8 +82,7 @@
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
-    <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
-    <a href="extrair_arranchamento.jsp">Extrair Arranchamento</a>
+    <a href="exportar.jsp">Exportar Arranchamento</a>
 </nav>
 <form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
     <%

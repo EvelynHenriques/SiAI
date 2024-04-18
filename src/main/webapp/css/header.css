@@ -4,19 +4,22 @@ header {
     padding: 10px 0;
     text-align: center;
 }
+
 nav {
     background-color: #488273;
     padding: 10px 0;
     text-align: center;
 }
+
 nav a {
     color: #fff;
     text-decoration: none;
     margin: 0 20px;
+    transition: color 0.3s; /* Transição suave da cor */
 }
+
 nav a:hover {
-    text-decoration: underline;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.7); /* Mudança de cor ao passar o mouse */
 }
 section {
     padding: 20px;

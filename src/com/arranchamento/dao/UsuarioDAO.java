@@ -90,6 +90,24 @@ public class UsuarioDAO {
         }
         return false;
     }
+    public String buscarNomeDeGuerraPorId(Integer usuarioId) {
+        String nome_de_guerra = null;
+        String sql = "SELECT nome_de_guerra FROM uhhdxfqg.public.usuarios WHERE id = ?";
+
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    nome_de_guerra = rs.getString("nome_de_guerra");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nome_de_guerra;
+    }
 
     // Você pode adicionar aqui outros métodos, como criar, atualizar e deletar usuários
 }

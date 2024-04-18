@@ -4,6 +4,8 @@ import arranchamento.modelo.Arranchamento;
 import arranchamento.util.ConexaoBanco;
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ArranchamentoDAO {
 
@@ -85,4 +87,50 @@ public class ArranchamentoDAO {
         }
         return null; // Retorna null se nenhum arranchamento for encontrado ou se ocorrer um erro
     }
+
+    public List<Integer> top10UsuariosArranchadosIds() {
+        List<Integer> top10UsuariosIds = new ArrayList<>();
+        String sql = "SELECT usuario_id, COUNT(*) AS ocorrencias\n" +
+                "FROM uhhdxfqg.public.arranchamentos\n" +
+                "GROUP BY usuario_id\n" +
+                "ORDER BY ocorrencias DESC\n" +
+                "LIMIT 10;";
+
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int usuarioId = rs.getInt("usuario_id");
+                top10UsuariosIds.add(usuarioId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return top10UsuariosIds;
+    }
+
+    public List<Integer> top10UsuariosArranchadosOcorrencias() {
+        List<Integer> top10UsuariosOcorrencias = new ArrayList<>();
+        String sql = "SELECT usuario_id, COUNT(*) AS ocorrencias\n" +
+                "FROM uhhdxfqg.public.arranchamentos\n" +
+                "GROUP BY usuario_id\n" +
+                "ORDER BY ocorrencias DESC\n" +
+                "LIMIT 10;";
+
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int ocorrencias = rs.getInt("ocorrencias");
+                top10UsuariosOcorrencias.add(ocorrencias);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return top10UsuariosOcorrencias;
+    }
+
+
 }

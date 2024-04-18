@@ -41,6 +41,17 @@
           <artifactId>postgresql</artifactId>
           <version>42.7.3</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+      <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-base</artifactId>
+          <version>11</version>
+      </dependency>
+      <dependency>
+          <groupId>jstl</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+      </dependency>
   </dependencies>
 
 

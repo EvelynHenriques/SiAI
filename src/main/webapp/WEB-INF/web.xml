@@ -11,14 +11,6 @@
     </welcome-file-list>
     <!-- Configuração para a página do Menu após o Login -->
     <servlet>
-        <servlet-name>MenuServlet</servlet-name>
-        <jsp-file>/menu.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MenuServlet</servlet-name>
-        <url-pattern>/menu</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>ArranchamentoServlet</servlet-name>
         <servlet-class>arranchamento.servlet.ArranchamentoServlet</servlet-class>
     </servlet>

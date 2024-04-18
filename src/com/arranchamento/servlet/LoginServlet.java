@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             System.out.println("Logado aqui");
             session.setAttribute("usuarioLogado", usuario.getId());
-            response.sendRedirect("menu"); // Redirecionar para a página do menu
+            response.sendRedirect("menu.jsp"); // Redirecionar para a página do menu
         } else {
             // Se a autenticação falhar, volte para a página de login com uma mensagem de erro
             request.setAttribute("erroLogin", "Email ou senha inválidos.");
