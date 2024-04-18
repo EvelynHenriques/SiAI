@@ -86,7 +86,7 @@
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
     <a href="exportar.jsp">Exportar Arranchamento</a>
-    <a href="logout.jsp">Sair</a>
+    <a href="login.jsp">Sair</a>
 </nav>
 <section>
     <h1>Guerreiros Mais Arranchados</h1>

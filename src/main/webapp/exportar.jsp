@@ -46,10 +46,7 @@ return;
         <label for="pelotao">Pelotão:</label>
         <input type="number" id="pelotao" name="pelotao" placeholder="1" required>
         <br><br>
-        <div id="loader-container">
-            <div id="loader"></div>
-            <div id="white-ball"></div>
-        </div>
+        <div id="loader"></div>
         <input type="submit" id="submitButton" value="Exportar">
     </form>
 </section>

@@ -248,19 +248,19 @@
         document.getElementById('lastDateDisplayed').value = lastDate; // Define a última data exibida no campo oculto
         function showLoader() {
             document.getElementById("loader").style.display = "block"; // Mostra o loader
-            document.getElementById("submitButton").style.marginTop = "20px";
-            document.getElementById("exibirButton").style.marginTop = "20px";
-                        document.getElementById("submitButton").disabled = true; // Desabilita o botão de submit
-
-
-
+            document.getElementById("white-ball").style.display = "block"; // Mostra a bola branca
+            document.getElementById("submitButton").disabled = true; // Desabilita o botão de submit
             return true;
         }
+
         window.onload = function() {
             document.getElementById("loader").style.display = "none";
+            document.getElementById("white-ball").style.display = "none"; // Esconde a bola branca
         };
+
         function hideLoader() {
             document.getElementById("loader").style.display = "none"; // Oculta o loader
+            document.getElementById("white-ball").style.display = "none"; // Oculta o loader
             document.getElementById("submitButton").disabled = false; // Habilita o botão de submit
             return true;
         }
@@ -269,8 +269,11 @@
 
 <div class="button-container">
     <button type="button" id="exibirButton" onclick="loadMoreWeeks(arranchadosMap);">Exibir mais</button>
-    <div id="loader"></div>
     <button type="submit" id="submitButton" form="arranchamentoForm" >Enviar</button>
+</div>
+<div id="loader-container">
+    <div id="loader"></div>
+    <div id="white-ball"></div>
 </div>
 </body>
 </html>
