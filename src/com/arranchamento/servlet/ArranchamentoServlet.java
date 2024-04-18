@@ -3,11 +3,14 @@ package arranchamento.servlet;
 import arranchamento.dao.ArranchamentoDAO;
 import arranchamento.modelo.Arranchamento;
 import arranchamento.service.ArrancharService;
-import arranchamento.modelo.Usuario;
+import arranchamento.util.DateUtil;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +37,7 @@ public class ArranchamentoServlet extends HttpServlet {
 
             // Continue com a lógica de processamento usando 'arranchamento'
         } else {
-            request.getRequestDispatcher("arranchamento.jsp").forward(request, response);
+            request.getRequestDispatcher("arranchamento").forward(request, response);
         }
     }
 
@@ -54,6 +57,8 @@ public class ArranchamentoServlet extends HttpServlet {
 
         // Obtém todos os valores para o parâmetro "arranchamento"
         String[] arranchamentos = request.getParameterValues("arranchamento");
+        String strDate = request.getParameter("lastDateDisplayed");  // Pega a string de data do formulário
+        java.sql.Date sqlDate = DateUtil.convertStringToSqlDate(strDate);  // Converte para java.sql.Date
 
         // Listas para armazenar as datas e os índices das refeições
         List<String> datas = new ArrayList<>();
@@ -71,6 +76,15 @@ public class ArranchamentoServlet extends HttpServlet {
             }
         }
         ArrancharService arrancharService = new ArrancharService();
-        arrancharService.receberArranchamento(datas, indicesRefeicao, usuarioId);
+        arrancharService.receberArranchamento(datas, indicesRefeicao, usuarioId, sqlDate);
+
+        // Configura a mensagem de sucesso e o redirecionamento
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Arranchamento enviado com sucesso');");
+        out.println("window.location = 'menu.jsp';"); // Altere 'menu.jsp' pelo caminho correto do menu principal
+        out.println("</script>");
     }
+
 }

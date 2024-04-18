@@ -15,7 +15,7 @@ body {
 .card {
     border: 1px solid #ccc;
     border-radius: 5px;
-
+    max-width: 160px;
     margin: 10px;
     float: left;
 }
@@ -25,10 +25,14 @@ body {
     text-align: center; /* Alinha o texto ao centro */
     background-color: #3d7272; /* Define a cor de fundo */
     padding: 5px;
+    color:white;
     word-wrap: break-word;
 }
 .meal {
     margin-bottom: 5px;
+    left: 18px;
+    padding: 8px;
+    top: 10px;
 
 }
 .cards {
@@ -36,37 +40,79 @@ body {
     grid-template-columns: repeat(7, 1fr);
     justify-content: center;
     align-items: center;
+    max-width: 85%;
+    margin: 0 auto; /* Centraliza horizontalmente */
+
 }
+/* Estilo dos checkboxes */
 input[type="checkbox"] {
-    /* Tornar a checkbox invisível */
-    opacity: 0;
-    position: absolute;
-    vertical-align: middle;
+    display: none; /* Oculta a checkbox padrão */
 }
 
 input[type="checkbox"] + label {
-    /* Estilizar o rótulo que acompanha a checkbox */
     display: inline-block;
-    vertical-align: middle; /* Alinhar verticalmente */
-    cursor: pointer; /* Mudar cursor para indicar clicabilidade */
-    position: relative; /* Permitir posicionamento absoluto do pseudo-elemento */
-    font-size: 18px;
-    padding-left: 10px;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
 }
 
 input[type="checkbox"] + label::before {
-    /* Estilizar a caixa de seleção */
     content: '';
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-color: transparent;
-    border: 1px solid #ccc; /* Manter a borda cinza */
-    border-radius: 5px; /* Arredondar as bordas */
-    margin-right: 5px; /* Adicionar espaçamento à direita */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3d7272;
+    border-radius: 50%; /* Arredonda a checkbox */
+    transition: border-color 0.3s ease;
 }
 
 input[type="checkbox"]:checked + label::before {
-    /* Alterar a cor de fundo quando selecionada */
-    background-color: #264d43; /* Verde quando selecionada */
+    background-color: #007788;
+    border-color: #3d7272; /* Cor quando a checkbox está marcada */
+}
+
+/* Estilo dos pseudo-elementos para criar o sinal de marcação */
+input[type="checkbox"] + label::after {
+    content: '\2714'; /* Símbolo de marcação Unicode */
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    font-size: 16px;
+    color: #fff;
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 0.3s ease;
+}
+
+input[type="checkbox"]:checked + label::after {
+    opacity: 0; /* Mostra o sinal de marcação quando a checkbox está marcada */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #3d7272;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #264d43;
+}
+
+.extend-all{
+
 }

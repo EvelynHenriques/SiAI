@@ -19,6 +19,7 @@ public class ArrancharService {
     private RefeicaoDAO refeicaoDAO;
     private ArranchamentoDAO arranchamentoDAO;
     private Map<Integer, String> tipoRefeicaoMap;
+    private Map<String, Integer> tipoRefeicaoToIntMap;
 
     public ArrancharService() {
         this.refeicaoDAO = new RefeicaoDAO();
@@ -28,27 +29,51 @@ public class ArrancharService {
         tipoRefeicaoMap.put(2, "almoco");
         tipoRefeicaoMap.put(3, "janta");
         tipoRefeicaoMap.put(4, "ceia");
+        getTipoRefeicaoToIntMap();
     }
 
-    public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId) {
+    public static Map<String, Integer> getTipoRefeicaoToIntMap() {
+        Map<String, Integer> refeicaoToInt = new HashMap<>();
+        refeicaoToInt.put("cafe", 1);
+        refeicaoToInt.put("almoco", 2);
+        refeicaoToInt.put("janta", 3);
+        refeicaoToInt.put("ceia", 4);
+        return refeicaoToInt;
+    }
+    public int getRefeicaoIntTipo(String tipoRefeicao) {
+        Map<String, Integer> tipoRefeicaoToInt = getTipoRefeicaoToIntMap();
+        Integer tipoRefeicaoId = tipoRefeicaoToInt.get(tipoRefeicao.toLowerCase());
+        if (tipoRefeicaoId == null) {
+            throw new IllegalArgumentException("Tipo de refeição desconhecido: " + tipoRefeicao);
+        }
+        return tipoRefeicaoId;
+    }
+
+    public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId, Date lastDateDisplayed) {
         if (datas.size() != indicesRefeicao.size()) {
             // As listas devem ter o mesmo tamanho. Se não, há um erro.
             throw new IllegalArgumentException("As listas de datas e índices de refeição devem ter o mesmo tamanho.");
         }
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println(lastDateDisplayed);
+
+        // Deleta os arranchamentos do usuário até a maior data
+        deletarArranchamentosAteData(usuarioId, lastDateDisplayed);
+
+        // Insere os novos arranchamentos recebidos
         for (int i = 0; i < datas.size(); i++) {
             String dataStr = datas.get(i);
             try {
                 Date dataUtil = sdf.parse(dataStr); // Converte a String para java.util.Date
                 java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime()); // Converte java.util.Date para java.sql.Date
 
-
                 Integer indiceRefeicao = indicesRefeicao.get(i);
-            String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
+                String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
 
-            Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
+                Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
 
-            Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId,refeicao.getId());
+                Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId, refeicao.getId());
                 if (arranchamento != null) {
                     arranchamentoDAO.atualizarArranchamento(arranchamento.getId());
                     System.out.println("Refeição encontrada para a data " + dataSql + " e tipo " + tipoRefeicao);
@@ -61,11 +86,16 @@ public class ArrancharService {
                     arranchamentoDAO.adicionarArranchamento(arranchamento);
                     System.out.println("Arranchamento adicionado para a data " + dataSql + " e tipo " + tipoRefeicao);
                 }
-        } catch (ParseException e) {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
+    }
 
-    // Resto da implementação da classe...
-}
+    public boolean deletarArranchamentosAteData(int usuarioId, Date data) {
+        return arranchamentoDAO.deletarArranchamentosAteDataMaisQuatorzeDias(usuarioId, (java.sql.Date) data);
+    }
+    public List<Arranchamento> buscarArranchamentosPorUsuario(int usuarioId) {
+        return arranchamentoDAO.buscarArranchamentosPorUsuario(usuarioId);
+    }
 }

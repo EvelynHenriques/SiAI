@@ -4,8 +4,9 @@ import arranchamento.modelo.Arranchamento;
 import arranchamento.util.ConexaoBanco;
 
 import java.sql.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class ArranchamentoDAO {
 
@@ -86,6 +87,67 @@ public class ArranchamentoDAO {
             e.printStackTrace();
         }
         return null; // Retorna null se nenhum arranchamento for encontrado ou se ocorrer um erro
+    }
+
+    public List<Arranchamento> buscarArranchamentosPorUsuario(int usuarioId) {
+        List<Arranchamento> arranchamentos = new ArrayList<>();
+        String sql = "SELECT a.*, r.data, r.tipo FROM uhhdxfqg.public.arranchamentos a " +
+                "JOIN uhhdxfqg.public.refeicoes r ON a.refeicao_id = r.id " +
+                "WHERE a.usuario_id = ?";
+
+        try (Connection conn = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, usuarioId);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Arranchamento arr = new Arranchamento();
+                arr.setId(rs.getInt("id"));
+                arr.setUsuarioId(rs.getInt("usuario_id"));
+                arr.setRefeicaoId(rs.getInt("refeicao_id"));
+                arr.setData(rs.getDate("data"));
+                arr.setTipoRefeicao(rs.getString("tipo"));
+                arranchamentos.add(arr);
+                //System.out.println(arr.getTipoRefeicao() + arr.getData());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Considerar uma abordagem melhor para tratamento de exceções
+        }
+        return arranchamentos;
+    }
+
+    public boolean atualizarArranchamento(Arranchamento arranchamento) {
+        String sql = "UPDATE uhhdxfqg.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+        try (Connection conn = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, arranchamento.getId());
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean deletarArranchamentosAteDataMaisQuatorzeDias(int usuarioId, Date data) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(data);
+        cal.add(Calendar.DATE, 14); // Adiciona 7 dias à data especificada
+
+        String sql = "DELETE FROM uhhdxfqg.public.arranchamentos " +
+                "WHERE usuario_id = ? " +
+                "AND EXISTS (SELECT 1 FROM uhhdxfqg.public.refeicoes WHERE arranchamentos.refeicao_id = refeicoes.id AND refeicoes.data <= ?)";
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioId);
+            pstmt.setDate(2, new java.sql.Date(cal.getTimeInMillis())); // Usando a data atual + 7 dias
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public List<Integer> top10UsuariosArranchadosIds() {
