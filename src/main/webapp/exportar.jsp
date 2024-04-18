@@ -33,7 +33,7 @@ return;
     <a href="login.jsp">Sair</a>
 </nav>
 <section>
-    <form method="post" action="export">
+    <form method="post" action="export" onsubmit="showLoader()">
         <label for="dataInicio">Data de Início:</label>
         <input type="text" id="dataInicio" name="dataInicio" required>
         <br><br>
@@ -46,7 +46,8 @@ return;
         <label for="pelotao">Pelotão:</label>
         <input type="number" id="pelotao" name="pelotao" placeholder="1" required>
         <br><br>
-        <input type="submit" value="Exportar">
+        <div id="loader"></div>
+        <input type="submit" id="submitButton" value="Exportar">
     </form>
 </section>
 <!-- Importe as bibliotecas jQuery e jQuery UI -->
@@ -58,6 +59,24 @@ return;
         $( "#dataInicio" ).datepicker();
         $( "#dataFim" ).datepicker();
     } );
+
+    // Função para mostrar o loader assim que a página é carregada
+    document.body.onload = function() {
+        document.getElementById("loader").style.display = "block";
+    };
+
+    // Função para ocultar o div de carregamento quando o carregamento da página estiver completo
+    window.onload = function() {
+        document.getElementById("loader").style.display = "none";
+    };
+
+    // Função para mostrar o loader e desabilitar o botão de submit durante o envio do formulário
+    function showLoader() {
+        document.getElementById("loader").style.display = "block"; // Mostra o loader
+        document.getElementById("submitButton").style.marginTop = "20px";
+        document.getElementById("submitButton").disabled = true; // Desabilita o botão de submit
+        return true;
+    }
 </script>
 </body>
 </html>

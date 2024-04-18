@@ -116,3 +116,20 @@ input[type="checkbox"]:checked + label::after {
 .extend-all{
 
 }
+#loader {
+    width: 12px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: l5 1s infinite linear alternate;
+    position: absolute; /* Posiciona o loader de forma absoluta */
+    top: 51%; /* Posiciona o loader no centro verticalmente */
+    left: 50%; /* Posiciona o loader no centro horizontalmente */
+    transform: translate(-50%, -50%);
+    margin-top: 10px;
+}
+@keyframes l5 {
+    0%  {box-shadow: 20px 0 #ffd700, -20px 0 #0002;background: #ffd700 }
+    33% {box-shadow: 20px 0 #ffd700, -20px 0 #0002;background: #0002}
+    66% {box-shadow: 20px 0 #0002,-20px 0 #ffd700; background: #0002}
+    100%{box-shadow: 20px 0 #0002,-20px 0 #ffd700; background: #ffd700}
+}
