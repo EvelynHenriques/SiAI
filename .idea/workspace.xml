@@ -10,8 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/ArrancharService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/ArrancharService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,6 +246,7 @@
       <workItem from="1713111772569" duration="4652000" />
       <workItem from="1713181339532" duration="10213000" />
       <workItem from="1713271887316" duration="3307000" />
+      <workItem from="1713434148546" duration="4184000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
