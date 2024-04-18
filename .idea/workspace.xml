@@ -9,10 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="aaaaa">
+    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/ExportServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/ExportServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/menu.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +84,6 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.ConexaoBancoTeste.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ExportadorXLSX.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -124,19 +131,6 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.arranchamento.siai.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExportadorXLSX" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="arranchamento.util.ExportadorXLSX" />
-      <module name="SiAI" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="arranchamento.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -231,15 +225,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ExportadorXLSX" />
       <item itemvalue="Application.ConexaoBancoTeste" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.87" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.ExportadorXLSX" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -264,7 +252,6 @@
       <workItem from="1713111772569" duration="4652000" />
       <workItem from="1713181339532" duration="10213000" />
       <workItem from="1713271887316" duration="3307000" />
-      <workItem from="1713434148546" duration="6348000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -318,8 +305,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
     <MESSAGE value="bd" />
-    <MESSAGE value="aaaaa" />
-    <option name="LAST_COMMIT_MESSAGE" value="aaaaa" />
+    <option name="LAST_COMMIT_MESSAGE" value="bd" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

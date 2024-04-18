@@ -77,7 +77,8 @@ return;
     // Função para mostrar o loader e desabilitar o botão de submit durante o envio do formulário
     function showLoader() {
         document.getElementById("loader").style.display = "block"; // Mostra o loader
-        document.getElementById("submitButton").style.marginTop = "20px";
+        document.getElementById("loader").style.marginTop = "30px";
+        document.getElementById("submitButton").style.marginTop = "30px";
         document.getElementById("submitButton").disabled = true; // Desabilita o botão de submit
         return true;
     }
