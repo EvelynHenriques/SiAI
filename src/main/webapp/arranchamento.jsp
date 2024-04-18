@@ -100,30 +100,39 @@
             var cardsDiv = document.querySelector('.cards');
             var newContent = '';
             var lastDateFormatted = '';
-            var weekCount = document.getElementsByClassName('card').length / 7; // Calcula quantas semanas já foram carregadas
-
+            var weekCount = document.querySelectorAll('.card').length / 7; // Calculate how many weeks have already been loaded
+            var delay = 100; // Initial delay for the first card
             for (let i = 0; i < 7; i++) {
                 var currentDate = addDays(nextMonday, i);
                 var formattedDate = formatDate(currentDate);
-                var cardId = "card" + (weekCount * 7 + i);  // Gera um ID único para cada novo card
+                var cardId = "card" + (weekCount * 7 + i);  // Generate a unique ID for each new card
                 if (i == 6) { lastDateFormatted = formattedDate; }
-                newContent += '<div class="card" id="' + cardId + '">' +
-                    '<div class="day">' + daysOfWeek[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1] + ' (' + formattedDate + ')</div>';
+                newContent += '<div class="card" id="' + cardId + '" style="opacity: 0; transition-delay: ' + delay + 'ms;">'; // Set initial opacity to 0 and transition delay
+                newContent += '<div class="day">' + daysOfWeek[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1] + ' (' + formattedDate + ')</div>';
                 for (let j = 1; j <= meals.length; j++) {
                     var checkboxValue = formattedDate + "_" + j;
                     var isChecked = arranchadosMap.hasOwnProperty(checkboxValue) ? arranchadosMap[checkboxValue] : false;
-                    newContent += '<div class="meal">' +
-                        '<input type="checkbox" id="' + formattedDate.replace(/\//g, '_') + '_' + j + '" name="arranchamento" value="' + formattedDate + '_' + j + '"' + (isChecked ? ' checked' : '') + '>' +
-                        '<label for="' + formattedDate.replace(/\//g, '_') + '_' + j + '">' + meals[j-1] + '</label>' +
-                        '</div>';
+                    newContent += '<div class="meal">';
+                    newContent += '<input type="checkbox" id="' + formattedDate.replace(/\//g, '_') + '_' + j + '" name="arranchamento" value="' + formattedDate + '_' + j + '"' + (isChecked ? ' checked' : '') + '>';
+                    newContent += '<label for="' + formattedDate.replace(/\//g, '_') + '_' + j + '">' + meals[j-1] + '</label>';
+                    newContent += '</div>';
                 }
                 newContent += '</div>';
+                delay += 100; // Increment the delay for the next card
             }
             cardsDiv.innerHTML += newContent;
             nextMonday = addDays(nextMonday, 7); // Prepares for the loading of the next week
+
+            setTimeout(function() {
+                document.querySelectorAll('.card').forEach(function(card) {
+                    card.style.opacity = 1; // Change opacity to 1 after a short delay
+                });
+            }, 50); // Wait for a short delay before changing opacity
             document.getElementById('lastDateDisplayed').value = lastDateFormatted;
             restoreCheckboxStates();
         }
+
+
 
         function extendAll() {
             console.log('Iniciando a extensão do arranchamento...');
@@ -190,7 +199,7 @@
         for (int i = 0; i < 7; i++) {
             String formattedDate = sdf.format(cal.getTime());
     %>
-    <div class="card" id="card<%= i %>">
+    <div class="card loaded" id="card<%= i %>"> <!-- Adicionando a classe 'loaded' aqui -->
         <div class="day"><%= daysOfWeek[i] %> (<%= formattedDate %>)</div>
         <% for (int j = 1; j <= meals.length; j++) { %>
         <div class="meal">
@@ -203,6 +212,7 @@
     <% cal.add(Calendar.DATE, 1); %>
     <% } %>
 </form>
+
 
 
 
