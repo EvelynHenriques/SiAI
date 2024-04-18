@@ -5,17 +5,28 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha; // Armazenar como hash na prática
+    private String nomeDeGuerra;
+    private int matricula;
+    private int turma;
+    private int pelotao;
+
+
+
 
     // Construtores, getters e setters
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nome, String email, String senha) {
+    public Usuario(int id, String nome, String email, String senha, String nomeDeGuerra, int matricula, int turma, int pelotao) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.nomeDeGuerra = nomeDeGuerra;
+        this.matricula = matricula;
+        this.turma = turma;
+        this.pelotao = pelotao;
     }
 
     // Getters e setters aqui
@@ -51,4 +62,27 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getNomeDeGuerra() {return nomeDeGuerra;}
+    public void setNomeDeGuerra(String nomeDeGuerra) {
+        this.nomeDeGuerra = nomeDeGuerra;
+    }
+
+
+    public int getMatricula() { return matricula; }
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
+    }
+
+
+    public int getTurma() { return turma; }
+    public void setTurma(int turma) {
+        this.turma = turma;
+    }
+
+    public int getPelotao() { return pelotao; }
+    public void setPelotao(int pelotao) {
+        this.pelotao = pelotao;
+    }
+
 }

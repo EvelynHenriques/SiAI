@@ -53,7 +53,7 @@
 <body>
 <div class="container">
     <h2>Cadastro</h2>
-    <form action="seu_script_de_cadastro.php" method="post">
+    <form action="cadastro" method="post">
         <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
@@ -79,13 +79,23 @@
             <input type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
             <input type="submit" value="Cadastrar">
         </div>
     </form>
+    <%
+        String erroCadastro = (String) request.getAttribute("erroCadastro");
+        if (erroCadastro != null) {
+    %>
+    <script>
+        alert("<%= erroCadastro %>");
+    </script>
+    <%
+        }
+    %>
 </div>
 </body>
 </html>
