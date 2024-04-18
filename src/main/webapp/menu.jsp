@@ -64,8 +64,7 @@
 </header>
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
-    <a href="consultar_arranchamento.jsp">Consultar Arranchamento</a>
-    <a href="exportar_arranchamento.jsp">Exportar Arranchamento</a>
+    <a href="exportar.jsp">Exportar Arranchamento</a>
     <a href="login.jsp">Sair</a>
 </nav>
 <section>
