@@ -176,7 +176,7 @@
     <a href="login.jsp">Sair</a>
 
 </nav>
-<form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
+<form class="cards" action="arranchamento" method="post" id="arranchamentoForm" onsubmit="return showLoader();">
     <input type="hidden" id="lastDateDisplayed" name="lastDateDisplayed" value="" />
     <%
         Calendar cal = Calendar.getInstance();
@@ -236,12 +236,31 @@
         var lastCard = document.getElementById('card6');
         var lastDate = lastCard.querySelector('.day').textContent.match(/\((.*?)\)/)[1];
         document.getElementById('lastDateDisplayed').value = lastDate; // Define a última data exibida no campo oculto
+        function showLoader() {
+            document.getElementById("loader").style.display = "block"; // Mostra o loader
+            document.getElementById("submitButton").style.marginTop = "20px";
+            document.getElementById("exibirButton").style.marginTop = "20px";
+                        document.getElementById("submitButton").disabled = true; // Desabilita o botão de submit
+
+
+
+            return true;
+        }
+        window.onload = function() {
+            document.getElementById("loader").style.display = "none";
+        };
+        function hideLoader() {
+            document.getElementById("loader").style.display = "none"; // Oculta o loader
+            document.getElementById("submitButton").disabled = false; // Habilita o botão de submit
+            return true;
+        }
     }
 </script>
 
 <div class="button-container">
-    <button type="button" onclick="loadMoreWeeks(arranchadosMap);">Exibir mais</button>
-    <button type="submit" form="arranchamentoForm">Enviar</button>
+    <button type="button" id="exibirButton" onclick="loadMoreWeeks(arranchadosMap);">Exibir mais</button>
+    <div id="loader"></div>
+    <button type="submit" id="submitButton" form="arranchamentoForm" >Enviar</button>
 </div>
 </body>
 </html>
