@@ -19,7 +19,7 @@ public class ExportServlet extends HttpServlet {
         int turma = Integer.parseInt(request.getParameter("turma"));
         int pelotao = Integer.parseInt(request.getParameter("pelotao"));
 
-        if(ExportadorXLSX.exportarFormatado(System.getProperty("user.home") + "/Downloads/" + "arranchamento.xlsx", turma, pelotao, dataInicio, dataFim)){
+        if(ExportadorXLSX.exportarFormatado(System.getProperty("user.home") + "/Downloads/" + "arranchamento", turma, pelotao, dataInicio, dataFim)){
             System.out.println("ARRANCHAMENTO EXPORTADO");
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();

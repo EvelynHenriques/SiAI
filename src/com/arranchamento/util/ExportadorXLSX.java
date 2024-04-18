@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.Date;
 
@@ -80,6 +81,9 @@ public class ExportadorXLSX {
                 pstmt.setDate(3, DateUtil.convertStringToSqlDate(dataInicio));
                 pstmt.setDate(4, DateUtil.convertStringToSqlDate(dataFim));
 
+                nomeArquivo = nomeArquivo + "("+DateUtil.convertStringToSqlDate(dataInicio)+"&"+DateUtil.convertStringToSqlDate(dataFim)+").xlsx";
+                System.out.println(nomeArquivo);
+
                 ResultSet resultSet = pstmt.executeQuery();
 
                 Map<String, Map<String, List<String>>> dados = new HashMap<>();
@@ -96,11 +100,24 @@ public class ExportadorXLSX {
                 }
 
                 Workbook workbook = new XSSFWorkbook();
-                Sheet sheet = workbook.createSheet("Dados");
+                LocalDate today = LocalDate.now();
+                int year = today.getYear();
+                int ano = year % 100 +5 - turma;
+                Sheet sheet = workbook.createSheet(ano+"º Ano"+ pelotao+"º Pelotão");
+
+                Font font = workbook.createFont();
+                font.setBold(true);
+
+                // Aplica o estilo de fonte à célula
+                CellStyle style = workbook.createCellStyle();
+                style.setFont(font);
 
                 int rowNum = 0;
                 Row headerRow = sheet.createRow(rowNum++);
-                headerRow.createCell(0).setCellValue("Nome");
+                Cell cell = headerRow.createCell(0);
+                cell.setCellValue("NOME DE GUERRA");
+                cell.setCellStyle(style);
+
 
                 Set<String> datas = new TreeSet<>();
                 for (Map<String, List<String>> dataMap : dados.values()) {
