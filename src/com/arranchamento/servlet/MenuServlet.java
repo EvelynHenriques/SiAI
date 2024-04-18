@@ -1,4 +1,4 @@
-package arranchamento.web;
+package arranchamento.servlet;
 
 import arranchamento.service.MenuService;
 import javax.servlet.ServletException;
