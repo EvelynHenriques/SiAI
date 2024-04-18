@@ -9,22 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd">
-      <change afterPath="$PROJECT_DIR$/dados.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/CadastroServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/ExportServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/exportar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/modelo/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/modelo/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cadastro.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/menu.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,7 +76,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Tomcat 9.0.87.executor": "Run",
-    "git-widget-placeholder": "Merging arranchamento",
+    "git-widget-placeholder": "arranchamento",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/vsmsa/IdeaProjects/SiAI/src/main/webapp/images",
@@ -278,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713112090330</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="bd">
+      <option name="closed" value="true" />
+      <created>1713406578906</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713406578906</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
