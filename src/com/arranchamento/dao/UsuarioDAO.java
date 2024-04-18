@@ -11,13 +11,13 @@ public class UsuarioDAO {
 
     public Usuario buscarPorEmailESenha(String email, String senha) {
         Usuario usuario = null;
-        String sql = "SELECT * FROM uhhdxfqg.public.usuarios WHERE email = ? AND senha = ?"; // Senha deve ser verificada com hash
+        String sql = "SELECT * FROM uhhdxfqg.public.usuarios WHERE email = ? AND senha = ?";
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 
             pstmt.setString(1, email);
-            pstmt.setString(2, senha); // Em produção, use hash aqui
+            pstmt.setString(2, senha);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -26,7 +26,7 @@ public class UsuarioDAO {
                 usuario.setId(rs.getInt("id"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setEmail(rs.getString("email"));
-                // Não definir a senha por motivos de segurança
+                usuario.setSenha(rs.getString("senha"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

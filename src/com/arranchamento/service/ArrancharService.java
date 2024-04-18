@@ -49,29 +49,17 @@ public class ArrancharService {
         return tipoRefeicaoId;
     }
 
-    public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId) {
+    public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId, Date lastDateDisplayed) {
         if (datas.size() != indicesRefeicao.size()) {
             // As listas devem ter o mesmo tamanho. Se não, há um erro.
             throw new IllegalArgumentException("As listas de datas e índices de refeição devem ter o mesmo tamanho.");
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date maiorData = null;
-
-        // Encontra a maior data entre as datas recebidas
-        for (String dataStr : datas) {
-            try {
-                Date dataUtil = sdf.parse(dataStr);
-                if (maiorData == null || dataUtil.after(maiorData)) {
-                    maiorData = dataUtil;
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+        System.out.println(lastDateDisplayed);
 
         // Deleta os arranchamentos do usuário até a maior data
-        deletarArranchamentosAteData(usuarioId, maiorData);
+        deletarArranchamentosAteData(usuarioId, lastDateDisplayed);
 
         // Insere os novos arranchamentos recebidos
         for (int i = 0; i < datas.size(); i++) {

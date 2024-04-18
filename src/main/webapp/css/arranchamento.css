@@ -1,6 +1,3 @@
-html {
-    height: 100vh;
-}
 body {
     height: 100%;
     margin: 0;
@@ -90,4 +87,29 @@ input[type="checkbox"] + label::after {
 
 input[type="checkbox"]:checked + label::after {
     opacity: 0; /* Mostra o sinal de marcação quando a checkbox está marcada */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #3d7272;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #264d43;
+}
+
+.extend-all{
+
 }

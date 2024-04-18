@@ -48,7 +48,6 @@
 <html>
 <head>
     <title>Agenda de Refeições</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/arranchamento.css">
         <style>
             <%@include file="/css/header.css"%>
             <%@include file="/css/arranchamento.css"%>
@@ -94,32 +93,78 @@
                 }
             });
         }
+
         function loadMoreWeeks(arranchadosMap) {
             saveCheckboxStates();
             var daysOfWeek = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
             var meals = ["Café", "Almoço", "Janta", "Ceia"];
             var cardsDiv = document.querySelector('.cards');
             var newContent = '';
+            var lastDateFormatted = '';
+            var weekCount = document.getElementsByClassName('card').length / 7; // Calcula quantas semanas já foram carregadas
+
             for (let i = 0; i < 7; i++) {
                 var currentDate = addDays(nextMonday, i);
                 var formattedDate = formatDate(currentDate);
-                newContent += '<div class="card">' +
+                var cardId = "card" + (weekCount * 7 + i);  // Gera um ID único para cada novo card
+                if (i == 6) { lastDateFormatted = formattedDate; }
+                newContent += '<div class="card" id="' + cardId + '">' +
                     '<div class="day">' + daysOfWeek[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1] + ' (' + formattedDate + ')</div>';
                 for (let j = 1; j <= meals.length; j++) {
                     var checkboxValue = formattedDate + "_" + j;
                     var isChecked = arranchadosMap.hasOwnProperty(checkboxValue) ? arranchadosMap[checkboxValue] : false;
-                    console.log(checkboxValue + isChecked)
                     newContent += '<div class="meal">' +
-                        '<input type="checkbox" id="' + formattedDate + '_' + j + '" name="arranchamento" value="' + formattedDate + '_' + j + '"' + (isChecked ? ' checked' : '') + '>' +
-                        '<label for="' + formattedDate + '_' + j + '">' + meals[j-1] + '</label>' +
+                        '<input type="checkbox" id="' + formattedDate.replace(/\//g, '_') + '_' + j + '" name="arranchamento" value="' + formattedDate + '_' + j + '"' + (isChecked ? ' checked' : '') + '>' +
+                        '<label for="' + formattedDate.replace(/\//g, '_') + '_' + j + '">' + meals[j-1] + '</label>' +
                         '</div>';
                 }
                 newContent += '</div>';
             }
             cardsDiv.innerHTML += newContent;
-            nextMonday = addDays(nextMonday, 7); // Prepara para o carregamento da próxima semana
+            nextMonday = addDays(nextMonday, 7); // Prepares for the loading of the next week
+            document.getElementById('lastDateDisplayed').value = lastDateFormatted;
             restoreCheckboxStates();
         }
+
+        function extendAll() {
+            console.log('Iniciando a extensão do arranchamento...');
+
+            // Obtemos todos os cards.
+            var cards = document.querySelectorAll('.card');
+
+            // Assumimos que os primeiros 7 cards representam a primeira semana.
+            var firstWeekCheckboxes = [];
+            for (let i = 0; i < 7; i++) {
+                firstWeekCheckboxes.push(...cards[i].querySelectorAll('input[type="checkbox"]'));
+            }
+
+            console.log('Checkboxes da primeira semana coletadas:', firstWeekCheckboxes);
+
+            // Obtemos os estados das checkboxes da primeira semana.
+            var baseStates = firstWeekCheckboxes.map(checkbox => checkbox.checked);
+
+            // Iteramos sobre as semanas subsequentes.
+            for (let i = 7; i < cards.length; i++) {
+                let cardCheckboxes = cards[i].querySelectorAll('input[type="checkbox"]');
+                // Iteramos sobre as checkboxes de cada card e aplicamos os estados da primeira semana.
+                cardCheckboxes.forEach((checkbox, index) => {
+                    checkbox.checked = baseStates[index % 4]; // Agora utilizamos 4, pois há 4 refeições em cada dia.
+                    console.log(`Estado da checkbox ${checkbox.id} ajustado para: ${baseStates[index % 4]}`);
+                });
+            }
+        }
+
+
+
+        // Função auxiliar para formatar datas em DD/MM/YYYY
+        function formatDate(date) {
+            var d = new Date(date),
+                day = ('0' + d.getDate()).slice(-2),
+                month = ('0' + (d.getMonth() + 1)).slice(-2),
+                year = d.getFullYear();
+            return [day, month, year].join('/');
+        }
+
     </script>
 </head>
 <body>
@@ -133,6 +178,7 @@
     <a href="login.jsp">Sair</a>
 </nav>
 <form class="cards" action="arranchamento" method="post" id="arranchamentoForm">
+    <input type="hidden" id="lastDateDisplayed" name="lastDateDisplayed" value="" />
     <%
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 14); // Move calendar to two weeks from now
@@ -147,10 +193,24 @@
     %>
     <div class="card" id="card<%= i %>">
         <div class="day"><%= daysOfWeek[i] %> (<%= formattedDate %>)</div>
+        <% for (int j = 1; j <= meals.length; j++) { %>
+        <div class="meal">
+            <input type="checkbox" id="<%= formattedDate %>_<%= j %>" name="arranchamento" value="<%= formattedDate %>_<%= j %>"
+                <%= arranchadosMap.containsKey(formattedDate + "_" + j) && arranchadosMap.get(formattedDate + "_" + j) ? "checked" : "" %>>
+            <label for="<%= formattedDate %>_<%= j %>"><%= meals[j-1] %></label>
+        </div>
+        <% } %>
     </div>
+    <% if (i == 6) { %>
+    <div class="button-container">
+        <button type="button" onclick="extendAll();">Estender para todos</button>
+    </div>
+    <% } %>
     <% cal.add(Calendar.DATE, 1); %>
     <% } %>
 </form>
+
+
 
 <script>
     var arranchadosMap = <%= convertMapToJson(arranchadosMap) %>; // Convert Java map to JavaScript object
@@ -179,6 +239,9 @@
         }
 
         card.innerHTML = cardContent;
+        var lastCard = document.getElementById('card6');
+        var lastDate = lastCard.querySelector('.day').textContent.match(/\((.*?)\)/)[1];
+        document.getElementById('lastDateDisplayed').value = lastDate; // Define a última data exibida no campo oculto
     }
 </script>
 
