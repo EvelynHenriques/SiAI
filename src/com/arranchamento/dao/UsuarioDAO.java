@@ -4,8 +4,31 @@ import arranchamento.modelo.Usuario;
 import arranchamento.util.ConexaoBanco;
 
 import java.sql.*;
+import java.util.*;
 
 public class UsuarioDAO {
+
+    public List<Usuario> buscarTodosUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM uhhdxfqg.public.usuarios";
+
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));  // Consider security implications of handling passwords
+                usuarios.add(usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Consider a more robust error handling strategy
+        }
+        return usuarios;
+    }
 
     public Usuario buscarPorEmailESenha(String email, String senha) {
         Usuario usuario = null;
@@ -90,24 +113,37 @@ public class UsuarioDAO {
         }
         return false;
     }
-    public String buscarNomeDeGuerraPorId(Integer usuarioId) {
-        String nome_de_guerra = null;
-        String sql = "SELECT nome_de_guerra FROM uhhdxfqg.public.usuarios WHERE id = ?";
+    public Map<Integer, String> buscarNomesDeGuerraPorIds(List<Integer> usuarioIds) {
+        Map<Integer, String> nomesDeGuerra = new HashMap<>();
+        if (usuarioIds.isEmpty()) return nomesDeGuerra;
+
+        // SQL statement preparation moved outside of the try block to highlight preparation logic
+        String placeholders = String.join(",", Collections.nCopies(usuarioIds.size(), "?"));  // Create placeholders for IN clause
+        String sql = "SELECT id, nome_de_guerra FROM uhhdxfqg.public.usuarios WHERE id IN (" + placeholders + ")";
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 
-            pstmt.setInt(1, usuarioId);
+            int index = 1;
+            for (Integer id : usuarioIds) {
+                pstmt.setInt(index++, id);
+            }
+
+            // Set fetch size if dealing with large data sets
+            pstmt.setFetchSize(50);
+
             try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    nome_de_guerra = rs.getString("nome_de_guerra");
+                while (rs.next()) {
+                    nomesDeGuerra.put(rs.getInt("id"), rs.getString("nome_de_guerra"));
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();  // Consider a more robust logging strategy here
         }
-        return nome_de_guerra;
+        return nomesDeGuerra;
     }
+
+
 
     // Você pode adicionar aqui outros métodos, como criar, atualizar e deletar usuários
 }

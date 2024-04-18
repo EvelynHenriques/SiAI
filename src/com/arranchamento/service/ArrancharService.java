@@ -4,15 +4,12 @@ import arranchamento.dao.ArranchamentoDAO;
 import arranchamento.dao.RefeicaoDAO;
 import arranchamento.modelo.Arranchamento;
 import arranchamento.modelo.Refeicao;
+import javafx.util.Pair;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 import java.sql.SQLException;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ArrancharService {
 
@@ -56,40 +53,41 @@ public class ArrancharService {
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println(lastDateDisplayed);
+        //System.out.println(lastDateDisplayed);
 
         // Deleta os arranchamentos do usuário até a maior data
         deletarArranchamentosAteData(usuarioId, lastDateDisplayed);
 
-        // Insere os novos arranchamentos recebidos
-        for (int i = 0; i < datas.size(); i++) {
-            String dataStr = datas.get(i);
             try {
-                Date dataUtil = sdf.parse(dataStr); // Converte a String para java.util.Date
-                java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime()); // Converte java.util.Date para java.sql.Date
-
-                Integer indiceRefeicao = indicesRefeicao.get(i);
-                String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
-
-                Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
-
-                Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId, refeicao.getId());
-                if (arranchamento != null) {
-                    arranchamentoDAO.atualizarArranchamento(arranchamento.getId());
-                    System.out.println("Refeição encontrada para a data " + dataSql + " e tipo " + tipoRefeicao);
-                } else {
-                    // Criar uma nova instância de Arranchamento antes de tentar definir valores
-                    arranchamento = new Arranchamento();
-                    arranchamento.setRefeicaoId(refeicao.getId());
-                    arranchamento.setUsuarioId(usuarioId);
-                    // Supondo que exista um método adicionarArranchamento que aceite um objeto Arranchamento
-                    arranchamentoDAO.adicionarArranchamento(arranchamento);
-                    System.out.println("Arranchamento adicionado para a data " + dataSql + " e tipo " + tipoRefeicao);
+                List<Arranchamento> arranchamentos = new ArrayList<>();
+                List<Refeicao> refeicoes = new ArrayList<>();
+                List<Pair<java.sql.Date, String>> listaDataTipo = new ArrayList<>();
+                for(int i=0; i<datas.size(); i++){
+                    Date dataUtil = sdf.parse(datas.get(i)); // Converte a String para java.util.Date
+                    java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime()); // Converte java.util.Date para java.sql.Date
+                    Integer indiceRefeicao = indicesRefeicao.get(i);
+                    String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
+                    Pair<java.sql.Date, String> novoPar = new Pair<>(dataSql, tipoRefeicao);
+                    listaDataTipo.add(novoPar);
                 }
+                refeicoes = refeicaoDAO.buscarPorListaDataETipo(listaDataTipo);
+                for(int i=0; i<refeicoes.size(); i++) {
+                    Arranchamento arranchamento = new Arranchamento();
+                    arranchamento.setRefeicaoId((refeicoes.get(i)).getId());
+                    arranchamento.setUsuarioId(usuarioId);
+                    arranchamentos.add(arranchamento);
+                }
+                arranchamentoDAO.adicionarArranchamentos(arranchamentos);
+
+                //Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
+                // Criar uma nova instância de Arranchamento antes de tentar definir valores
+                // Supondo que exista um método adicionarArranchamento que aceite um objeto Arranchamento
+                System.out.println("Arranchamentos adicionados");
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        }
+        //}
     }
 
     public boolean deletarArranchamentosAteData(int usuarioId, Date data) {
