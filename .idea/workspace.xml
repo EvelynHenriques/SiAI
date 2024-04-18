@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="SiAi:war exploded" />
+      <artifact name="SiAI:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -11,12 +11,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="bd">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b/storage_v2/_src_/database/uhhdxfqg.09yirg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b/storage_v2/_src_/database/uhhdxfqg.09yirg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/MenuServlet.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/arranchamento.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/css/arranchamento.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/arranchamento.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/exportar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/exportar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/exportar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/exportar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/menu.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +120,7 @@
       <recent name="C:\Users\carol\IdeaProjects\SiAI\src\main\webapp\WEB-INF" />
     </key>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.87">
+  <component name="RunManager" selected="Application.ConexaoBancoTeste">
     <configuration name="ConexaoBancoTeste" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arranchamento.siai.ConexaoBancoTeste" />
       <module name="SiAI" />
@@ -136,9 +136,9 @@
     </configuration>
     <configuration name="Tomcat 9.0.87" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.87" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
-        <artifact name="SiAi:war exploded">
+        <artifact name="SiAI:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/SiAi_war_exploded" />
+            <option name="CONTEXT_PATH" value="" />
           </settings>
         </artifact>
       </deployment>
@@ -248,6 +248,7 @@
       <workItem from="1713111772569" duration="4652000" />
       <workItem from="1713181339532" duration="10213000" />
       <workItem from="1713271887316" duration="3307000" />
+      <workItem from="1713434148546" duration="4184000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -281,15 +282,7 @@
       <option name="project" value="LOCAL" />
       <updated>1713407875036</updated>
     </task>
-    <task id="LOCAL-00005" summary="bd">
-      <option name="closed" value="true" />
-      <created>1713447552017</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1713447552017</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
