@@ -24,3 +24,6 @@ nav a:hover {
 section {
     padding: 20px;
 }
+.menu{
+    text-decoration: none;
+}
