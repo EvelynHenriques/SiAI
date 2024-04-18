@@ -17,13 +17,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            height: 100%;
-        }
         <%@include file="/css/header.css"%>
         <%@include file="/css/menu.css"%>
     </style>
