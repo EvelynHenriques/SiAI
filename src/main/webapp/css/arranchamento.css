@@ -133,3 +133,17 @@ input[type="checkbox"]:checked + label::after {
     66% {box-shadow: 20px 0 #0002,-20px 0 #ffd700; background: #0002}
     100%{box-shadow: 20px 0 #0002,-20px 0 #ffd700; background: #ffd700}
 }
+
+.card {
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Adiciona uma transição de 0.5 segundos para a propriedade de opacidade */
+}
+
+.card.loaded {
+    opacity: 1;
+}
+
+.card.leaving {
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Adiciona uma transição de 0.5 segundos para a propriedade de opacidade */
+}
