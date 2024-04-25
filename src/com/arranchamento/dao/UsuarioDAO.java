@@ -21,11 +21,11 @@ public class UsuarioDAO {
                 usuario.setId(rs.getInt("id"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));  // Consider security implications of handling passwords
+                usuario.setSenha(rs.getString("senha"));  
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
-            e.printStackTrace();  // Consider a more robust error handling strategy
+            e.printStackTrace();  
         }
         return usuarios;
     }
@@ -51,7 +51,6 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Tratamento de exceção ou log
         }
         return usuario;
     }
@@ -78,7 +77,6 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Tratamento de exceção ou log
         }
         return true;
     }
@@ -129,7 +127,6 @@ public class UsuarioDAO {
                 pstmt.setInt(index++, id);
             }
 
-            // Set fetch size if dealing with large data sets
             pstmt.setFetchSize(50);
 
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -138,12 +135,10 @@ public class UsuarioDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();  // Consider a more robust logging strategy here
+            e.printStackTrace();  
         }
         return nomesDeGuerra;
     }
 
 
-
-    // Você pode adicionar aqui outros métodos, como criar, atualizar e deletar usuários
 }
