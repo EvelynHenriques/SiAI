@@ -25,7 +25,7 @@ public class ExportServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Arquivo exportado com sucesso');");
-            out.println("window.location = 'menu.jsp';"); // Altere 'menu.jsp' pelo caminho correto do menu principal
+            out.println("window.location = 'menu.jsp';"); 
             out.println("</script>");
 
         } else {
@@ -34,7 +34,7 @@ public class ExportServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Erro ao exportar arquivo');");
-            out.println("window.location = 'menu.jsp';"); // Altere 'menu.jsp' pelo caminho correto do menu principal
+            out.println("window.location = 'menu.jsp';"); 
             out.println("</script>");
         }
     }
