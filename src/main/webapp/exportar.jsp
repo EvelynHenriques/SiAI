@@ -64,17 +64,14 @@ return;
         });
     } );
 
-    // Função para mostrar o loader assim que a página é carregada
     document.body.onload = function() {
         document.getElementById("loader").style.display = "block";
     };
 
-    // Função para ocultar o div de carregamento quando o carregamento da página estiver completo
     window.onload = function() {
         document.getElementById("loader").style.display = "none";
     };
 
-    // Função para mostrar o loader e desabilitar o botão de submit durante o envio do formulário
     function showLoader() {
         document.getElementById("loader").style.display = "block"; // Mostra o loader
         document.getElementById("loader").style.marginTop = "30px";
