@@ -8,7 +8,6 @@ public class Arranchamento {
     private int refeicaoId;
     private Date data;
     private String tipoRefeicao;
-    // Getters e setters
     public int getId() {
         return id;
     }
