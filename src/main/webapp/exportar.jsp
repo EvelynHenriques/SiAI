@@ -14,9 +14,7 @@ return;
 <head>
     <meta charset="UTF-8">
     <title>Formulário</title>
-    <!-- Adicione links para os arquivos CSS e JS necessários para o date picker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
-    <!-- Importe os arquivos CSS -->
     <style>
         <%@include file="/css/header.css"%>
         <%@include file="/css/menu.css"%>
@@ -50,10 +48,8 @@ return;
         <input type="submit" id="submitButton" value="Exportar">
     </form>
 </section>
-<!-- Importe as bibliotecas jQuery e jQuery UI -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<!-- Script para inicializar o date picker -->
 <script>
     $( function() {
         $( "#dataInicio" ).datepicker({
