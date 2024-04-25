@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class ConexaoBanco {
 
-    // Substitua pela URL, usuário e senha fornecidos pelo ElephantSQL
     private static final String URL = "jdbc:postgresql://bubble.db.elephantsql.com:5432/uhhdxfqg";
     private static final String USER = "uhhdxfqg";
     private static final String PASSWORD = "TZ4DHsEuexg4mxI1HZF2UUtcO6fGswnd";
