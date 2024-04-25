@@ -21,7 +21,7 @@ public class ArranchamentoServlet extends HttpServlet {
 
     @Override
     public void init() {
-        arrancharService = new ArrancharService(); // Supõe-se que você tem essa classe de serviço
+        arrancharService = new ArrancharService(); // Supoe que você tem essa classe de serviço
     }
 
     @Override
@@ -35,7 +35,6 @@ public class ArranchamentoServlet extends HttpServlet {
             ArranchamentoDAO arranchamentoDAO = new ArranchamentoDAO();
             Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId, refeicaoId);
 
-            // Continue com a lógica de processamento usando 'arranchamento'
         } else {
             request.getRequestDispatcher("arranchamento").forward(request, response);
         }
@@ -83,7 +82,7 @@ public class ArranchamentoServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<script type=\"text/javascript\">");
         out.println("alert('Arranchamento enviado com sucesso');");
-        out.println("window.location = 'menu.jsp';"); // Altere 'menu.jsp' pelo caminho correto do menu principal
+        out.println("window.location = 'menu.jsp';"); 
         out.println("</script>");
     }
 
