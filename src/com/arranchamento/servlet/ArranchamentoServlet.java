@@ -31,7 +31,7 @@ public class ArranchamentoServlet extends HttpServlet {
         if (session != null && session.getAttribute("usuarioId") != null) {
             int usuarioId = (Integer) session.getAttribute("usuarioId");
 
-            int refeicaoId = Integer.parseInt(request.getParameter("refeicaoId")); // Supõe que você passa o ID da refeição como parâmetro
+            int refeicaoId = Integer.parseInt(request.getParameter("refeicaoId")); 
             ArranchamentoDAO arranchamentoDAO = new ArranchamentoDAO();
             Arranchamento arranchamento = arranchamentoDAO.buscarArranchamentoPorUsuarioERefeicao(usuarioId, refeicaoId);
 
