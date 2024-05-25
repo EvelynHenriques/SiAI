@@ -100,12 +100,12 @@
             var cardsDiv = document.querySelector('.cards');
             var newContent = '';
             var lastDateFormatted = '';
-            var weekCount = document.querySelectorAll('.card').length / 7; // Calculate how many weeks have already been loaded
-            var delay = 100; // Initial delay for the first card
+            var weekCount = document.querySelectorAll('.card').length / 7; 
+            var delay = 100; 
             for (let i = 0; i < 7; i++) {
                 var currentDate = addDays(nextMonday, i);
                 var formattedDate = formatDate(currentDate);
-                var cardId = "card" + (weekCount * 7 + i);  // Generate a unique ID for each new card
+                var cardId = "card" + (weekCount * 7 + i);  
                 if (i == 6) { lastDateFormatted = formattedDate; }
                 newContent += '<div class="card" id="' + cardId + '" style="opacity: 0; transition-delay: ' + delay + 'ms;">'; // Set initial opacity to 0 and transition delay
                 newContent += '<div class="day">' + daysOfWeek[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1] + ' (' + formattedDate + ')</div>';
@@ -118,14 +118,14 @@
                     newContent += '</div>';
                 }
                 newContent += '</div>';
-                delay += 100; // Increment the delay for the next card
+                delay += 100; 
             }
             cardsDiv.innerHTML += newContent;
-            nextMonday = addDays(nextMonday, 7); // Prepares for the loading of the next week
+            nextMonday = addDays(nextMonday, 7); 
 
             setTimeout(function() {
                 document.querySelectorAll('.card').forEach(function(card) {
-                    card.style.opacity = 1; // Change opacity to 1 after a short delay
+                    card.style.opacity = 1; 
                 });
             }, 50); // Wait for a short delay before changing opacity
             document.getElementById('lastDateDisplayed').value = lastDateFormatted;
@@ -190,16 +190,16 @@
     <%
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 14); // Move calendar to two weeks from now
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY); // Set to start of the next coming Monday
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY); 
 
         String[] daysOfWeek = {"Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"};
         String[] meals = {"Café", "Almoço", "Janta", "Ceia"};
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Use the output format
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
 
         for (int i = 0; i < 7; i++) {
             String formattedDate = sdf.format(cal.getTime());
     %>
-    <div class="card loaded" id="card<%= i %>"> <!-- Adicionando a classe 'loaded' aqui -->
+    <div class="card loaded" id="card<%= i %>"> 
         <div class="day"><%= daysOfWeek[i] %> (<%= formattedDate %>)</div>
         <% for (int j = 1; j <= meals.length; j++) { %>
         <div class="meal">
@@ -248,19 +248,19 @@
         document.getElementById('lastDateDisplayed').value = lastDate; // Define a última data exibida no campo oculto
         function showLoader() {
             document.getElementById("loader").style.display = "block"; // Mostra o loader
-            document.getElementById("submitButton").style.marginTop = "20px";
-            document.getElementById("exibirButton").style.marginTop = "20px";
-                        document.getElementById("submitButton").disabled = true; // Desabilita o botão de submit
-
-
-
+            document.getElementById("white-ball").style.display = "block"; // Mostra a bola branca
+            document.getElementById("submitButton").disabled = true;
             return true;
         }
+
         window.onload = function() {
             document.getElementById("loader").style.display = "none";
+            document.getElementById("white-ball").style.display = "none"; // Esconde a bola branca
         };
+
         function hideLoader() {
             document.getElementById("loader").style.display = "none"; // Oculta o loader
+            document.getElementById("white-ball").style.display = "none"; // Oculta o loader
             document.getElementById("submitButton").disabled = false; // Habilita o botão de submit
             return true;
         }
@@ -269,8 +269,11 @@
 
 <div class="button-container">
     <button type="button" id="exibirButton" onclick="loadMoreWeeks(arranchadosMap);">Exibir mais</button>
-    <div id="loader"></div>
     <button type="submit" id="submitButton" form="arranchamentoForm" >Enviar</button>
+</div>
+<div id="loader-container">
+    <div id="loader"></div>
+    <div id="white-ball"></div>
 </div>
 </body>
 </html>

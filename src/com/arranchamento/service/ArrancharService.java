@@ -80,8 +80,6 @@ public class ArrancharService {
                 arranchamentoDAO.adicionarArranchamentos(arranchamentos);
 
                 //Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
-                // Criar uma nova instância de Arranchamento antes de tentar definir valores
-                // Supondo que exista um método adicionarArranchamento que aceite um objeto Arranchamento
                 System.out.println("Arranchamentos adicionados");
 
             } catch (ParseException e) {

@@ -57,6 +57,7 @@ a:hover {
 input::placeholder {
     color: #b6b6b6;
 }
+
 #loader {
     width: 12px;
     aspect-ratio: 1;
@@ -67,7 +68,9 @@ input::placeholder {
     left: 50%; /* Posiciona o loader no centro horizontalmente */
     transform: translate(-50%, -50%);
     margin-top: 10px;
+    z-index: 1;
 }
+
 @keyframes l5 {
     0%  {box-shadow: 20px 0 #ffd700, -20px 0 #0002;background: #ffd700 }
     33% {box-shadow: 20px 0 #ffd700, -20px 0 #0002;background: #0002}

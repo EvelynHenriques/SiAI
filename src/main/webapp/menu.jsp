@@ -11,7 +11,7 @@
         return;
     }
 
-    MenuService menuService = new MenuService();  // Assuming MenuService is set to be used directly like this
+    MenuService menuService = new MenuService(); 
     List<String> topUsuariosNomes = menuService.obterTop10UsuariosNomes();
     List<Integer> topUsuariosOcorrencias = menuService.obterTop10UsuariosOcorrencias();
 %>
@@ -86,7 +86,7 @@
 <nav>
     <a href="arranchamento.jsp">Preencher Arranchamento</a>
     <a href="exportar.jsp">Exportar Arranchamento</a>
-    <a href="logout.jsp">Sair</a>
+    <a href="login.jsp">Sair</a>
 </nav>
 <section>
     <h1>Guerreiros Mais Arranchados</h1>

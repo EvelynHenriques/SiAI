@@ -31,7 +31,7 @@ public class MenuService {
 
     public List<String> obterTop10UsuariosNomes() {
         List<Integer> top10UsuariosIds = arranchamentoDAO.top10UsuariosArranchadosIds();
-        if (top10UsuariosIds.isEmpty()) return new ArrayList<>(); // Early return if there are no IDs
+        if (top10UsuariosIds.isEmpty()) return new ArrayList<>(); 
 
         Map<Integer, String> nomesDeGuerra = usuarioDAO.buscarNomesDeGuerraPorIds(top10UsuariosIds);
         List<String> top10UsuariosNomes = new ArrayList<>();
@@ -40,7 +40,7 @@ public class MenuService {
             top10UsuariosNomes.add(nomeDeGuerra);
         }
 
-        System.out.println(top10UsuariosNomes);  // This will print the list of names to the console
+        System.out.println(top10UsuariosNomes); 
         return top10UsuariosNomes;
     }
 
@@ -50,6 +50,6 @@ public class MenuService {
     }
 
     public void atualizarDadosUsuarios() {
-        initializeUsuarioMap();  // Re-initialize the user map to refresh data
+        initializeUsuarioMap(); 
     }
 }
