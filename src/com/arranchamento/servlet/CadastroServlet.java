@@ -39,6 +39,9 @@ public class CadastroServlet extends HttpServlet {
     }
 
     private String hashSenhaDIFERENTE(String senha) {
+        if(senha == null){
+            return null;
+        }
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(senha.getBytes());

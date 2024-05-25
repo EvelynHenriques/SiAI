@@ -37,6 +37,7 @@
     <p>Ainda não possui um cadastro?</p><a href="cadastro.jsp">Cadastrar</a>
 </form>
 <script>
+
     // Função para mostrar o loader assim que a página é carregada
     document.body.onload = function() {
         document.getElementById("loader").style.display = "block";
