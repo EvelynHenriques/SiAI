@@ -11,7 +11,7 @@ import java.util.List;
 public class ArranchamentoDAO {
 
     public boolean adicionarArranchamento(Arranchamento arranchamento) {
-        String sql = "INSERT INTO uhhdxfqg.public.arranchamentos (usuario_id, refeicao_id, updated_at) VALUES (?, ?, NOW())";
+        String sql = "INSERT INTO postgres.public.arranchamentos (usuario_id, refeicao_id, updated_at) VALUES (?, ?, NOW())";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -36,7 +36,7 @@ public class ArranchamentoDAO {
     }
 
     public boolean adicionarArranchamentos(List<Arranchamento> arranchamentos) {
-        String sql = "INSERT INTO uhhdxfqg.public.arranchamentos (usuario_id, refeicao_id, updated_at) VALUES (?, ?, NOW())";
+        String sql = "INSERT INTO postgres.public.arranchamentos (usuario_id, refeicao_id, updated_at) VALUES (?, ?, NOW())";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -67,7 +67,7 @@ public class ArranchamentoDAO {
 
 
     public boolean atualizarArranchamento(int arranchamentoId) {
-        String sql = "UPDATE uhhdxfqg.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+        String sql = "UPDATE postgres.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 
@@ -82,7 +82,7 @@ public class ArranchamentoDAO {
     }
 
     public boolean deletarArranchamento(int usuarioId, int refeicaoId) {
-        String sql = "DELETE FROM uhhdxfqg.public.arranchamentos WHERE usuario_id = ? AND refeicao_id = ?";
+        String sql = "DELETE FROM postgres.public.arranchamentos WHERE usuario_id = ? AND refeicao_id = ?";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 
@@ -98,7 +98,7 @@ public class ArranchamentoDAO {
     }
 
     public Arranchamento buscarArranchamentoPorUsuarioERefeicao(int usuarioId, int refeicaoId) {
-        String sql = "SELECT * FROM uhhdxfqg.public.arranchamentos WHERE usuario_id = ? AND refeicao_id = ?";
+        String sql = "SELECT * FROM postgres.public.arranchamentos WHERE usuario_id = ? AND refeicao_id = ?";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 
@@ -122,8 +122,8 @@ public class ArranchamentoDAO {
 
     public List<Arranchamento> buscarArranchamentosPorUsuario(int usuarioId) {
         List<Arranchamento> arranchamentos = new ArrayList<>();
-        String sql = "SELECT a.*, r.data, r.tipo FROM uhhdxfqg.public.arranchamentos a " +
-                "JOIN uhhdxfqg.public.refeicoes r ON a.refeicao_id = r.id " +
+        String sql = "SELECT a.*, r.data, r.tipo FROM postgres.public.arranchamentos a " +
+                "JOIN postgres.public.refeicoes r ON a.refeicao_id = r.id " +
                 "WHERE a.usuario_id = ?";
 
         try (Connection conn = ConexaoBanco.obterConexao();
@@ -148,7 +148,7 @@ public class ArranchamentoDAO {
     }
 
     public boolean atualizarArranchamento(Arranchamento arranchamento) {
-        String sql = "UPDATE uhhdxfqg.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+        String sql = "UPDATE postgres.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
         try (Connection conn = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, arranchamento.getId());
@@ -164,9 +164,9 @@ public class ArranchamentoDAO {
         cal.setTime(data);
         cal.add(Calendar.DATE, 14); // Adiciona 7 dias à data especificada
 
-        String sql = "DELETE FROM uhhdxfqg.public.arranchamentos " +
+        String sql = "DELETE FROM postgres.public.arranchamentos " +
                 "WHERE usuario_id = ? " +
-                "AND EXISTS (SELECT 1 FROM uhhdxfqg.public.refeicoes WHERE arranchamentos.refeicao_id = refeicoes.id AND refeicoes.data <= ?)";
+                "AND EXISTS (SELECT 1 FROM postgres.public.refeicoes WHERE arranchamentos.refeicao_id = refeicoes.id AND refeicoes.data <= ?)";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 
@@ -184,7 +184,7 @@ public class ArranchamentoDAO {
     public List<Integer> top10UsuariosArranchadosIds() {
         List<Integer> top10UsuariosIds = new ArrayList<>();
         String sql = "SELECT usuario_id, COUNT(*) AS ocorrencias\n" +
-                "FROM uhhdxfqg.public.arranchamentos\n" +
+                "FROM postgres.public.arranchamentos\n" +
                 "GROUP BY usuario_id\n" +
                 "ORDER BY ocorrencias DESC\n" +
                 "LIMIT 10;";
@@ -206,7 +206,7 @@ public class ArranchamentoDAO {
     public List<Integer> top10UsuariosArranchadosOcorrencias() {
         List<Integer> top10UsuariosOcorrencias = new ArrayList<>();
         String sql = "SELECT usuario_id, COUNT(*) AS ocorrencias\n" +
-                "FROM uhhdxfqg.public.arranchamentos\n" +
+                "FROM postgres.public.arranchamentos\n" +
                 "GROUP BY usuario_id\n" +
                 "ORDER BY ocorrencias DESC\n" +
                 "LIMIT 10;";

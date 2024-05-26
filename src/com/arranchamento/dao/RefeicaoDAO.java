@@ -16,7 +16,7 @@ public class RefeicaoDAO {
 
     public Refeicao buscarPorDataETipo(java.sql.Date data, String tipo) {
         Refeicao refeicao = null;
-        String sql = "SELECT * FROM uhhdxfqg.public.refeicoes WHERE data = ? AND tipo = ?";
+        String sql = "SELECT * FROM postgres.public.refeicoes WHERE data = ? AND tipo = ?";
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
@@ -41,7 +41,7 @@ public class RefeicaoDAO {
 
     public List<Refeicao> buscarPorListaDataETipo(List<Pair<Date, String>> listaDataTipo) {
         List<Refeicao> refeicoes = new ArrayList<>();
-        String sql = "SELECT * FROM uhhdxfqg.public.refeicoes WHERE data = ? AND tipo = ?";
+        String sql = "SELECT * FROM postgres.public.refeicoes WHERE data = ? AND tipo = ?";
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
@@ -68,7 +68,7 @@ public class RefeicaoDAO {
     }
 
     public boolean adicionarRefeicao(Refeicao refeicao) {
-        String sql = "INSERT INTO uhhdxfqg.public.refeicoes (tipo, data) VALUES (?, ?)";
+        String sql = "INSERT INTO postgres.public.refeicoes (tipo, data) VALUES (?, ?)";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 

@@ -19,6 +19,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         AutenticacaoService autenticacaoService = new AutenticacaoService();
         Usuario usuario = autenticacaoService.autenticar(email, password);
+
         if (usuario != null) {
             System.out.println("usuario doPost nao eh nulo");
             HttpSession session = request.getSession();
@@ -36,9 +37,12 @@ public class LoginServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.print(jsonResponse);
             out.flush();
+
         } else {
+            // Redirecionar para a página de login com mensagem de erro
             request.setAttribute("erroLogin", "Email ou senha inválidos.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }

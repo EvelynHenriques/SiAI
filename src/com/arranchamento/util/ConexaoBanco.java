@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConexaoBanco {
 
-    private static final String URL = "jdbc:postgresql://bubble.db.elephantsql.com:5432/uhhdxfqg";
-    private static final String USER = "uhhdxfqg";
-    private static final String PASSWORD = "TZ4DHsEuexg4mxI1HZF2UUtcO6fGswnd";
+    private static final String URL = "jdbc:postgresql://heartlessly-revived-coatimundi.data-1.use1.tembo.io:5432/postgres";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "XkL4OZtXH8oarag9";
 
     static {
         try {

@@ -10,7 +10,7 @@ public class UsuarioDAO {
 
     public List<Usuario> buscarTodosUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT * FROM uhhdxfqg.public.usuarios";
+        String sql = "SELECT * FROM postgres.public.usuarios";
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql);
@@ -32,7 +32,7 @@ public class UsuarioDAO {
 
     public Usuario buscarPorEmailESenha(String email, String senha) {
         Usuario usuario = null;
-        String sql = "SELECT * FROM uhhdxfqg.public.usuarios WHERE email = ? AND senha = ?";
+        String sql = "SELECT * FROM postgres.public.usuarios WHERE email = ? AND senha = ?";
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
@@ -57,7 +57,7 @@ public class UsuarioDAO {
 
     public boolean buscarPorEmailEMatricula(String email, int matricula) {
         Usuario usuario = null;
-        String sql = "SELECT * FROM uhhdxfqg.public.usuarios WHERE email = ? OR matricula = ?"; // Senha deve ser verificada com hash
+        String sql = "SELECT * FROM postgres.public.usuarios WHERE email = ? OR matricula = ?"; // Senha deve ser verificada com hash
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
@@ -82,7 +82,7 @@ public class UsuarioDAO {
     }
 
     public boolean inserirUsuario(Usuario usuario){
-        String sql = "INSERT INTO uhhdxfqg.public.usuarios (nome, email, senha, nome_de_guerra, matricula, turma, pelotao) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO postgres.public.usuarios (nome, email, senha, nome_de_guerra, matricula, turma, pelotao) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -117,7 +117,7 @@ public class UsuarioDAO {
 
         // SQL statement preparation moved outside of the try block to highlight preparation logic
         String placeholders = String.join(",", Collections.nCopies(usuarioIds.size(), "?"));  // Create placeholders for IN clause
-        String sql = "SELECT id, nome_de_guerra FROM uhhdxfqg.public.usuarios WHERE id IN (" + placeholders + ")";
+        String sql = "SELECT id, nome_de_guerra FROM postgres.public.usuarios WHERE id IN (" + placeholders + ")";
 
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
