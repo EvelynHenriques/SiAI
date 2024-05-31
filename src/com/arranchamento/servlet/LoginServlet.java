@@ -9,6 +9,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(name = "loginServlet", value = "/loginServlet")
 public class LoginServlet extends HttpServlet {
@@ -17,32 +19,41 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        boolean fromApp = request.getParameter("fromApp") != null && request.getParameter("fromApp").equals("true");
+
         AutenticacaoService autenticacaoService = new AutenticacaoService();
         Usuario usuario = autenticacaoService.autenticar(email, password);
 
         if (usuario != null) {
-            System.out.println("usuario doPost nao eh nulo");
             HttpSession session = request.getSession();
-            System.out.println("Logado aqui");
             session.setAttribute("usuarioLogado", usuario.getId());
 
-            // Converter objeto para JSON e logar
-            Gson gson = new Gson();
-            String jsonResponse = gson.toJson(usuario);
-            System.out.println("JSON Response: " + jsonResponse);
-
-            // Enviar resposta JSON
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter out = response.getWriter();
-            out.print(jsonResponse);
-            out.flush();
-
+            if (fromApp) {
+                Map<String, Object> responseData = new HashMap<>();
+                responseData.put("usuario", usuario);
+                responseData.put("sessionId", session.getId());
+                Gson gson = new Gson();
+                String jsonResponse = gson.toJson(responseData);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                PrintWriter out = response.getWriter();
+                out.print(jsonResponse);
+                out.flush();
+            } else {
+                response.sendRedirect("menu.jsp");
+            }
         } else {
-            // Redirecionar para a página de login com mensagem de erro
-            request.setAttribute("erroLogin", "Email ou senha inválidos.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-            dispatcher.forward(request, response);
+            if (fromApp) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                PrintWriter out = response.getWriter();
+                out.print("{\"erro\": \"Email ou senha inválidos.\"}");
+                out.flush();
+            } else {
+                request.setAttribute("erroLogin", "Email ou senha inválidos.");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+                dispatcher.forward(request, response);
+            }
         }
     }
 }
