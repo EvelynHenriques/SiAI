@@ -26,6 +26,8 @@ public class ArranchamentoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        String fromApp = request.getParameter("fromApp");
+
         if (session != null && session.getAttribute("usuarioLogado") != null) {
             int usuarioId = (Integer) session.getAttribute("usuarioLogado");
 
@@ -39,10 +41,13 @@ public class ArranchamentoServlet extends HttpServlet {
                 // Logando a quantidade de arranchamentos encontrados
                 System.out.println("Arranchamentos encontrados: " + arranchamentos.size());
 
+                String jsonResponse = arranchamentosToJson(arranchamentos);
+                System.out.println("JSON de resposta: " + jsonResponse);
+
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 PrintWriter out = response.getWriter();
-                out.print(arranchamentosToJson(arranchamentos));
+                out.print(jsonResponse);
                 out.flush();
             } catch (Exception e) {
                 // Logando qualquer exceção que ocorra
@@ -51,9 +56,32 @@ public class ArranchamentoServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao buscar arranchamentos");
             }
         } else {
-            // Logando quando o usuário não está logado
-            System.out.println("Usuário não logado, redirecionando para login.jsp");
-            response.sendRedirect("login.jsp");
+            if ("true".equals(fromApp)) {
+                // Logando quando o usuário não está logado mas o fromApp está presente
+                System.out.println("Requisição do app recebida. Parâmetro fromApp presente.");
+                try {
+                    // Lógica para buscar arranchamentos e retornar como JSON
+                    List<Arranchamento> arranchamentos = new ArrayList<>(); // Considerar como vazio se não autenticado
+
+                    String jsonResponse = arranchamentosToJson(arranchamentos);
+                    System.out.println("JSON de resposta para app: " + jsonResponse);
+
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    PrintWriter out = response.getWriter();
+                    out.print(jsonResponse);
+                    out.flush();
+                } catch (Exception e) {
+                    // Logando qualquer exceção que ocorra
+                    System.err.println("Erro ao buscar arranchamentos para app: " + e.getMessage());
+                    e.printStackTrace();
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao buscar arranchamentos");
+                }
+            } else {
+                // Logando quando o usuário não está logado
+                System.out.println("Usuário não logado, redirecionando para login.jsp");
+                response.sendRedirect("login.jsp");
+            }
         }
     }
 
@@ -74,6 +102,7 @@ public class ArranchamentoServlet extends HttpServlet {
         String[] arranchamentos = request.getParameterValues("arranchamento");
         String strDate = request.getParameter("lastDateDisplayed");  // Pega a string de data do formulário
         java.sql.Date sqlDate = DateUtil.convertStringToSqlDate(strDate);  // Converte para java.sql.Date
+        System.out.println(arranchamentos);
 
         // Listas para armazenar as datas e os índices das refeições
         List<String> datas = new ArrayList<>();
