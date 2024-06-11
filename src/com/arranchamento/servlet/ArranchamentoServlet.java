@@ -9,6 +9,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,10 +101,33 @@ public class ArranchamentoServlet extends HttpServlet {
         boolean fromApp = request.getParameter("fromApp") != null && request.getParameter("fromApp").equals("true");
 
         // Obtém todos os valores para o parâmetro "arranchamento"
-        String[] arranchamentos = request.getParameterValues("arranchamento");
+        String[] arranchamentos = request.getParameterValues("arranchamento[]");
         String strDate = request.getParameter("lastDateDisplayed");  // Pega a string de data do formulário
-        java.sql.Date sqlDate = DateUtil.convertStringToSqlDate(strDate);  // Converte para java.sql.Date
-        System.out.println(arranchamentos);
+
+        // Adiciona log para verificar a data recebida
+        System.out.println("Data recebida: " + strDate);
+
+        // Certifique-se de que o formato da data está correto
+        SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlDate = null;
+        try {
+            java.util.Date utilDate = fromUser.parse(strDate);
+            String formattedDate = myFormat.format(utilDate);
+            sqlDate = java.sql.Date.valueOf(formattedDate);
+        } catch (ParseException e) {
+            System.err.println("Erro ao converter a data: " + e.getMessage());
+        }
+
+        // Verifica se a data foi convertida corretamente
+        System.out.println("Data convertida para SQL: " + sqlDate);
+
+        // Adiciona log para verificar os arranchamentos recebidos
+        if (arranchamentos != null) {
+            for (String arr : arranchamentos) {
+                System.out.println("Arranchamento recebido: " + arr);
+            }
+        }
 
         // Listas para armazenar as datas e os índices das refeições
         List<String> datas = new ArrayList<>();
@@ -111,14 +136,24 @@ public class ArranchamentoServlet extends HttpServlet {
         // Processa cada valor de "arranchamento" para extrair as datas e os índices das refeições
         if (arranchamentos != null) {
             for (String arranchamento : arranchamentos) {
-                // O formato esperado de cada arranchamento é "dd/MM/yyyy_i"
+                // O formato esperado de cada arranchamento é "yyyy-MM-dd_i"
                 String[] partes = arranchamento.split("_");
                 if (partes.length == 2) {
                     datas.add(partes[0]);
-                    indicesRefeicao.add(Integer.parseInt(partes[1])); // Converte o índice para Integer
+                    try {
+                        indicesRefeicao.add(Integer.parseInt(partes[1])); // Converte o índice para Integer
+                    } catch (NumberFormatException e) {
+                        System.err.println("Erro ao converter índice de refeição: " + partes[1]);
+                    }
                 }
             }
         }
+
+        // Imprime os parâmetros do request
+        System.out.println("Parâmetros recebidos:");
+        request.getParameterMap().forEach((key, values) -> {
+            System.out.println(key + " = " + String.join(", ", values));
+        });
 
         ArrancharService arrancharService = new ArrancharService();
         arrancharService.receberArranchamento(datas, indicesRefeicao, usuarioId, sqlDate);
@@ -140,6 +175,7 @@ public class ArranchamentoServlet extends HttpServlet {
             out.println("</script>");
         }
     }
+
 
     private String arranchamentosToJson(List<Arranchamento> arranchamentos) {
         StringBuilder json = new StringBuilder("[");

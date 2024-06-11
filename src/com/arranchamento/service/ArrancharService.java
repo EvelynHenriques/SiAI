@@ -16,7 +16,6 @@ public class ArrancharService {
     private RefeicaoDAO refeicaoDAO;
     private ArranchamentoDAO arranchamentoDAO;
     private Map<Integer, String> tipoRefeicaoMap;
-    private Map<String, Integer> tipoRefeicaoToIntMap;
 
     public ArrancharService() {
         this.refeicaoDAO = new RefeicaoDAO();
@@ -26,7 +25,6 @@ public class ArrancharService {
         tipoRefeicaoMap.put(2, "almoco");
         tipoRefeicaoMap.put(3, "janta");
         tipoRefeicaoMap.put(4, "ceia");
-        getTipoRefeicaoToIntMap();
     }
 
     public static Map<String, Integer> getTipoRefeicaoToIntMap() {
@@ -37,6 +35,7 @@ public class ArrancharService {
         refeicaoToInt.put("ceia", 4);
         return refeicaoToInt;
     }
+
     public int getRefeicaoIntTipo(String tipoRefeicao) {
         Map<String, Integer> tipoRefeicaoToInt = getTipoRefeicaoToIntMap();
         Integer tipoRefeicaoId = tipoRefeicaoToInt.get(tipoRefeicao.toLowerCase());
@@ -46,51 +45,65 @@ public class ArrancharService {
         return tipoRefeicaoId;
     }
 
-    public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId, Date lastDateDisplayed) {
+    public void receberArranchamento(List<String> datas, List<Integer> indicesRefeicao, int usuarioId, java.sql.Date lastDateDisplayed) {
         if (datas.size() != indicesRefeicao.size()) {
             // As listas devem ter o mesmo tamanho. Se não, há um erro.
             throw new IllegalArgumentException("As listas de datas e índices de refeição devem ter o mesmo tamanho.");
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        //System.out.println(lastDateDisplayed);
+        SimpleDateFormat fromUser = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         // Deleta os arranchamentos do usuário até a maior data
         deletarArranchamentosAteData(usuarioId, lastDateDisplayed);
 
-            try {
-                List<Arranchamento> arranchamentos = new ArrayList<>();
-                List<Refeicao> refeicoes = new ArrayList<>();
-                List<Pair<java.sql.Date, String>> listaDataTipo = new ArrayList<>();
-                for(int i=0; i<datas.size(); i++){
-                    Date dataUtil = sdf.parse(datas.get(i)); // Converte a String para java.util.Date
-                    java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime()); // Converte java.util.Date para java.sql.Date
-                    Integer indiceRefeicao = indicesRefeicao.get(i);
-                    String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
-                    Pair<java.sql.Date, String> novoPar = new Pair<>(dataSql, tipoRefeicao);
-                    listaDataTipo.add(novoPar);
-                }
-                refeicoes = refeicaoDAO.buscarPorListaDataETipo(listaDataTipo);
-                for(int i=0; i<refeicoes.size(); i++) {
-                    Arranchamento arranchamento = new Arranchamento();
-                    arranchamento.setRefeicaoId((refeicoes.get(i)).getId());
-                    arranchamento.setUsuarioId(usuarioId);
-                    arranchamentos.add(arranchamento);
-                }
-                arranchamentoDAO.adicionarArranchamentos(arranchamentos);
+        try {
+            List<Arranchamento> arranchamentos = new ArrayList<>();
+            List<Refeicao> refeicoes = new ArrayList<>();
+            List<Pair<java.sql.Date, String>> listaDataTipo = new ArrayList<>();
 
-                //Refeicao refeicao = refeicaoDAO.buscarPorDataETipo(dataSql, tipoRefeicao);
-                System.out.println("Arranchamentos adicionados");
+            for (int i = 0; i < datas.size(); i++) {
+                String date = datas.get(i);
 
-            } catch (ParseException e) {
-                e.printStackTrace();
+                // Verifica se a data já está no formato yyyy-MM-dd
+                if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    try {
+                        java.util.Date utilDate = fromUser.parse(date);
+                        date = myFormat.format(utilDate);
+                    } catch (ParseException e) {
+                        System.err.println("Erro ao converter a data: " + date);
+                        e.printStackTrace();
+                    }
+                }
+
+                java.sql.Date dataSql = java.sql.Date.valueOf(date);
+                Integer indiceRefeicao = indicesRefeicao.get(i);
+                String tipoRefeicao = tipoRefeicaoMap.get(indiceRefeicao);
+                Pair<java.sql.Date, String> novoPar = new Pair<>(dataSql, tipoRefeicao);
+                listaDataTipo.add(novoPar);
             }
-        //}
+
+            refeicoes = refeicaoDAO.buscarPorListaDataETipo(listaDataTipo);
+            for (Refeicao refeicao : refeicoes) {
+                Arranchamento arranchamento = new Arranchamento();
+                arranchamento.setRefeicaoId(refeicao.getId());
+                arranchamento.setUsuarioId(usuarioId);
+                arranchamentos.add(arranchamento);
+            }
+
+            arranchamentoDAO.adicionarArranchamentos(arranchamentos);
+
+            System.out.println("Arranchamentos adicionados");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public boolean deletarArranchamentosAteData(int usuarioId, Date data) {
-        return arranchamentoDAO.deletarArranchamentosAteDataMaisQuatorzeDias(usuarioId, (java.sql.Date) data);
+    public boolean deletarArranchamentosAteData(int usuarioId, java.sql.Date data) {
+        return arranchamentoDAO.deletarArranchamentosAteDataMaisQuatorzeDias(usuarioId, data);
     }
+
     public List<Arranchamento> buscarArranchamentosPorUsuario(int usuarioId) {
         return arranchamentoDAO.buscarArranchamentosPorUsuario(usuarioId);
     }
