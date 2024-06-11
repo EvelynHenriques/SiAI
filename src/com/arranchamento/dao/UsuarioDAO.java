@@ -97,13 +97,7 @@ public class UsuarioDAO {
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
-                // O arranchamento foi salvo com sucesso
-                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        usuario.setId(generatedKeys.getInt(1));
-                        return true;
-                    }
-                }
+                return true;
             }
         } catch (SQLException e) {
             // Log e tratamento de exceção adequado

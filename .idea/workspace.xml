@@ -10,10 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="changed alguma coisa">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/ArranchamentoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/ArranchamentoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/ExportServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/ExportServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/util/ExportadorXLSX.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,6 +260,8 @@
       <workItem from="1717350949902" duration="4147000" />
       <workItem from="1717421486287" duration="938000" />
       <workItem from="1717504379194" duration="4438000" />
+      <workItem from="1717876238079" duration="9673000" />
+      <workItem from="1718106752717" duration="5081000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
