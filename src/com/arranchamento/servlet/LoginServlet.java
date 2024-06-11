@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
                 responseData.put("userId", usuario.getId());
                 responseData.put("sessionId", session.getId());
                 Gson gson = new Gson();
+
                 String jsonResponse = gson.toJson(responseData);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");

@@ -36,23 +36,17 @@ public class FaltasServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Adicionando prints de depuração para verificar os parâmetros recebidos
         String userIdStr = req.getParameter("user_id");
         String mealType = req.getParameter("meal_type");
         String date = req.getParameter("date");
-
-        System.out.println("Debug: user_id = " + userIdStr);
-        System.out.println("Debug: meal_type = " + mealType);
-        System.out.println("Debug: date = " + date);
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         if (userIdStr == null || mealType == null || date == null) {
-            System.out.println("Debug: Missing parameters");
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            out.print("{\"error\":\"Missing parameters\"}");
+            out.print("{\"success\":false, \"message\":\"Missing parameters\"}");
             out.flush();
             return;
         }
@@ -62,12 +56,20 @@ public class FaltasServlet extends HttpServlet {
             System.out.println("Debug: user_id parsed successfully = " + userId);
             boolean result = faltasService.sendMealInfo(userId, mealType, date);
             System.out.println("Debug: sendMealInfo result = " + result);
-            out.print("{\"success\":" + result + "}");
+
+            String jsonResponse;
+            if (result) {
+                jsonResponse = "{\"success\":true, \"message\":\"Arranchamento encontrado, falta tirada com sucesso\"}";
+            } else {
+                jsonResponse = "{\"success\":false, \"message\":\"Arranchamento não encontrado\"}";
+            }
+
+            out.print(jsonResponse);
             out.flush();
         } catch (NumberFormatException e) {
             System.out.println("Debug: Invalid user_id - " + userIdStr);
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            out.print("{\"error\":\"Invalid user_id\"}");
+            out.print("{\"success\":false, \"message\":\"Invalid user_id\"}");
             out.flush();
         }
     }
