@@ -106,6 +106,36 @@ public class UsuarioDAO {
         }
         return false;
     }
+
+    public boolean isUserAdmin(int userId) {
+        System.out.println("Iniciando isUserAdmin para userId: " + userId);
+        String sql = "SELECT admin FROM postgres.public.usuarios WHERE id = ?";
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            System.out.println("Conexão com o banco de dados estabelecida.");
+            pstmt.setInt(1, userId);
+            System.out.println("PreparedStatement configurado com userId: " + userId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                System.out.println("Executando query...");
+                if (rs.next()) {
+                    boolean isAdmin = rs.getBoolean("admin");
+                    System.out.println("Resultado encontrado: admin = " + isAdmin);
+                    return isAdmin;
+                } else {
+                    System.out.println("Nenhum resultado encontrado para userId: " + userId);
+                }
+            }
+        } catch (SQLException e) {
+            // Log e tratamento de exceção adequado
+            System.err.println("Erro ao executar query: " + e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("Retornando false, usuário não é admin ou ocorreu um erro.");
+        return false;
+    }
+
     public Map<Integer, String> buscarNomesDeGuerraPorIds(List<Integer> usuarioIds) {
         Map<Integer, String> nomesDeGuerra = new HashMap<>();
         if (usuarioIds.isEmpty()) return nomesDeGuerra;

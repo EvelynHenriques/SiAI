@@ -180,7 +180,34 @@ public class ArranchamentoDAO {
         return arranchamentos;
     }
 
+    public List<Arranchamento> buscarArranchamentosPorUsuarioTipoEData(int usuarioId, String mealType, java.sql.Date date) {
+        List<Arranchamento> arranchamentos = new ArrayList<>();
+        String sql = "SELECT a.*, r.data, r.tipo FROM postgres.public.arranchamentos a " +
+                "JOIN postgres.public.refeicoes r ON a.refeicao_id = r.id " +
+                "WHERE a.usuario_id = ? AND r.tipo = ? AND r.data = ?";
 
+        try (Connection conn = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioId);
+            pstmt.setString(2, mealType);
+            pstmt.setDate(3, date);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Arranchamento arr = new Arranchamento();
+                arr.setId(rs.getInt("id"));
+                arr.setUsuarioId(rs.getInt("usuario_id"));
+                arr.setRefeicaoId(rs.getInt("refeicao_id"));
+                arr.setData(rs.getDate("data"));
+                arr.setTipoRefeicao(rs.getString("tipo"));
+                arranchamentos.add(arr);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Considerar uma abordagem melhor para tratamento de exceções
+        }
+        return arranchamentos;
+    }
 
     public boolean atualizarArranchamento(Arranchamento arranchamento) {
         String sql = "UPDATE postgres.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";

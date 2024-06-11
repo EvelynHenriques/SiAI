@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
             if (fromApp) {
                 Map<String, Object> responseData = new HashMap<>();
                 responseData.put("usuario", usuario);
+                responseData.put("userId", usuario.getId());
                 responseData.put("sessionId", session.getId());
                 Gson gson = new Gson();
                 String jsonResponse = gson.toJson(responseData);
