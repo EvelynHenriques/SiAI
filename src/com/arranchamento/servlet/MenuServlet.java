@@ -6,8 +6,11 @@ import com.google.gson.Gson;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.io.Console;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,23 +36,32 @@ public class MenuServlet extends HttpServlet {
 
         boolean fromApp = request.getParameter("fromApp") != null && request.getParameter("fromApp").equals("true");
 
-        MenuService menuService = new MenuService();
-        List<String> topUsuariosNomes = menuService.obterTop10UsuariosNomes();
-        List<Integer> topUsuariosOcorrencias = menuService.obterTop10UsuariosOcorrencias();
-
         if (fromApp) {
+            MenuService menuService = new MenuService();
             Map<String, Object> responseData = new HashMap<>();
-            responseData.put("topUsuariosNomes", topUsuariosNomes);
-            responseData.put("topUsuariosOcorrencias", topUsuariosOcorrencias);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+            String dataHoje = sdf.format(new java.util.Date());
+
+            int user_id = (int) session.getAttribute("usuarioLogado");
+
+            List<String> arranchamentosHoje = menuService.obterArranchamentoHoje(dataHoje, user_id);
+            responseData.put("arranchamentosHoje", arranchamentosHoje);
+            responseData.put("usuario_id", user_id);
 
             Gson gson = new Gson();
             String jsonResponse = gson.toJson(responseData);
+            System.out.println("Resposta menu: " + jsonResponse);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
             out.print(jsonResponse);
             out.flush();
         } else {
+            MenuService menuService = new MenuService();
+            List<String> topUsuariosNomes = menuService.obterTop10UsuariosNomes();
+            List<Integer> topUsuariosOcorrencias = menuService.obterTop10UsuariosOcorrencias();
+
             request.setAttribute("topUsuariosNomes", topUsuariosNomes);
             request.setAttribute("topUsuariosOcorrencias", topUsuariosOcorrencias);
             RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");

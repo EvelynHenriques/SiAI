@@ -9,13 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="arranchamento servlet update">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.zip" beforeDir="false" />
+    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="arranchamento DAO error fix">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b/storage_v2/_src_/database/uhhdxfqg.09yirg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b/storage_v2/_src_/database/uhhdxfqg.09yirg/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b/storage_v2/_src_/database/uhhdxfqg.09yirg/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b/storage_v2/_src_/database/uhhdxfqg.09yirg/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/70f5c97b-a510-4da9-95a0-2f7bfe5e893b/storage_v2/_src_/database/uhhdxfqg.09yirg/schema/public.abK9xQ.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/ArrancharService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/ArrancharService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/ArranchamentoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/ArranchamentoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/MenuServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/MenuServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +268,8 @@
       <workItem from="1717884525621" duration="6573000" />
       <workItem from="1717895472576" duration="4903000" />
       <workItem from="1718022716388" duration="10000" />
-      <workItem from="1718105717682" duration="1349000" />
+      <workItem from="1718105717682" duration="4265000" />
+      <workItem from="1718116052330" duration="5155000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -336,7 +343,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717509155557</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="arranchamento servlet update">
+      <option name="closed" value="true" />
+      <created>1718107438226</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718107438226</updated>
+    </task>
+    <task id="LOCAL-00011" summary="arranchamento DAO error fix">
+      <option name="closed" value="true" />
+      <created>1718116874111</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1718116874111</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,17 +394,8 @@
     <MESSAGE value="changed database" />
     <MESSAGE value="changed alguma coisa" />
     <MESSAGE value="arranchamento servlet update" />
-    <option name="LAST_COMMIT_MESSAGE" value="arranchamento servlet update" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="org.postgresql.util.PSQLException" package="org.postgresql.util" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="arranchamento DAO error fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="arranchamento DAO error fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

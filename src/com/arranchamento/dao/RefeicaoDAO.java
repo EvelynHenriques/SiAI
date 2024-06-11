@@ -67,6 +67,28 @@ public class RefeicaoDAO {
         return refeicoes;
     }
 
+    public List<Integer> buscarPorListaData(String data) {
+        List<Integer> refeicoesIds = new ArrayList<>();
+        String sql = "SELECT id FROM postgres.public.refeicoes WHERE data = ?";
+
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            pstmt.setString(1, data);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int refeicaoId = rs.getInt("id");
+                refeicoesIds.add(refeicaoId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return refeicoesIds;
+    }
+
+
     public boolean adicionarRefeicao(Refeicao refeicao) {
         String sql = "INSERT INTO postgres.public.refeicoes (tipo, data) VALUES (?, ?)";
         try (Connection conexao = ConexaoBanco.obterConexao();

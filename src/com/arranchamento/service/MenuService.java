@@ -1,7 +1,9 @@
 package arranchamento.service;
 
 import arranchamento.dao.ArranchamentoDAO;
+import arranchamento.dao.RefeicaoDAO;
 import arranchamento.dao.UsuarioDAO;
+import arranchamento.modelo.Arranchamento;
 import arranchamento.modelo.Usuario;
 
 import java.util.ArrayList;
@@ -47,6 +49,18 @@ public class MenuService {
 
     public List<Integer> obterTop10UsuariosOcorrencias() {
         return arranchamentoDAO.top10UsuariosArranchadosOcorrencias();
+    }
+
+    public List<String> obterArranchamentoHoje(String data, int user_id) {
+        ArranchamentoDAO arranchamentoDAO = new ArranchamentoDAO();
+        List<Arranchamento> arranchamentos = arranchamentoDAO.buscarArranchamentosPorUsuarioEData(user_id, data);
+
+        List<String> resultado = new ArrayList<>();
+        for (Arranchamento arr : arranchamentos) {
+            resultado.add(arr.getTipoRefeicao());
+        }
+
+        return resultado;
     }
 
     public void atualizarDadosUsuarios() {
