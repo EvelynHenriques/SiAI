@@ -8,6 +8,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -270,7 +271,7 @@ public class ExportadorXLSX {
         return false;
     }
 
-    public static boolean exportarFormatado(String nomeArquivo, int turma, int pelotao, String dataInicio, String dataFim) {
+    public static boolean exportarFormatado(OutputStream outputStream, int turma, int pelotao, String dataInicio, String dataFim) {
         String sql = "SELECT usr.nome_de_guerra AS NOME_DE_GUERRA, ref.tipo AS REFEICAO, ref.data AS DATA\n" +
                 "FROM arranchamentos arr\n" +
                 "JOIN usuarios usr ON arr.usuario_id = usr.id\n" +
@@ -284,7 +285,7 @@ public class ExportadorXLSX {
             pstmt.setDate(3, DateUtil.convertStringToSqlDate(dataInicio));
             pstmt.setDate(4, DateUtil.convertStringToSqlDate(dataFim));
 
-            nomeArquivo = nomeArquivo + "("+DateUtil.convertStringToSqlDate(dataInicio)+"&"+DateUtil.convertStringToSqlDate(dataFim)+").xlsx";
+            String nomeArquivo = System.getProperty("user.home") + "/Downloads/"+"("+DateUtil.convertStringToSqlDate(dataInicio)+"&"+DateUtil.convertStringToSqlDate(dataFim)+").xlsx";
             System.out.println(nomeArquivo);
 
             ResultSet resultSet = pstmt.executeQuery();
@@ -370,6 +371,7 @@ public class ExportadorXLSX {
                 sheet.autoSizeColumn(i);
             }
 
+            workbook.write(outputStream);
             FileOutputStream fileOut = new FileOutputStream(nomeArquivo);
             workbook.write(fileOut);
             fileOut.close();
@@ -383,6 +385,6 @@ public class ExportadorXLSX {
         return false;
     }
     public static void main(String[] args) {
-        exportarFormatado(System.getProperty("user.home") + "/Downloads/" + "/DADOS",25,2, "06/05/2024", "10/05/2024");
+        //exportarFormatado(System.getProperty("user.home") + "/Downloads/" + "/DADOS",25,2, "06/05/2024", "10/05/2024");
     }
 }
