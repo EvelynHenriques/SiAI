@@ -49,15 +49,12 @@ public class ArranchamentoDAO {
             int[] affectedRows = pstmt.executeBatch();
             for (int i = 0; i < affectedRows.length; i++) {
                 if (affectedRows[i] > 0) {
-                    // O arranchamento foi salvo com sucesso
-                    try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                        if (generatedKeys.next()) {
-                            arranchamentos.get(i).setId(generatedKeys.getInt(1));
-                        }
-                    }
+                    return true;
+
+
                 }
             }
-            return true;
+
         } catch (SQLException e) {
             // Log e tratamento de exceção adequado
             e.printStackTrace();
