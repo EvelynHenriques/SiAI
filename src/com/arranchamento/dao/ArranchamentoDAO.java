@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ArranchamentoDAO {
 
@@ -225,26 +227,51 @@ public class ArranchamentoDAO {
         }
     }
     public boolean deletarArranchamentosAteDataMaisQuatorzeDias(int usuarioId, Date data) {
+        Logger logger = Logger.getLogger(this.getClass().getName());
+
+        // Calcular a data da próxima segunda-feira daqui a 2 semanas
         Calendar cal = Calendar.getInstance();
-        cal.setTime(data);
-        cal.add(Calendar.DATE, 14); // Adiciona 7 dias à data especificada
+        cal.add(Calendar.WEEK_OF_YEAR, 2); // Adiciona 2 semanas à data atual
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY); // Define o dia da semana como segunda-feira
+        Date proximaSegunda = new Date(cal.getTimeInMillis());
+        logger.log(Level.INFO, "Próxima segunda daqui a 2 semanas: {0}", proximaSegunda);
+
+        // Calcular a data fim
+        Date dataFim;
+        if (proximaSegunda.equals(data)) {
+            Calendar calDataInicioMaisSeis = Calendar.getInstance();
+            calDataInicioMaisSeis.setTime(proximaSegunda);
+            calDataInicioMaisSeis.add(Calendar.DATE, 6);
+            dataFim = new Date(calDataInicioMaisSeis.getTimeInMillis());
+        } else {
+            Calendar calDataRecebidaMaisSeis = Calendar.getInstance();
+            calDataRecebidaMaisSeis.setTime(data);
+            calDataRecebidaMaisSeis.add(Calendar.DATE, 6);
+            dataFim = new Date(calDataRecebidaMaisSeis.getTimeInMillis());
+        }
+        logger.log(Level.INFO, "Data início: {0}", proximaSegunda);
+        logger.log(Level.INFO, "Data fim: {0}", dataFim);
 
         String sql = "DELETE FROM postgres.public.arranchamentos " +
                 "WHERE usuario_id = ? " +
-                "AND EXISTS (SELECT 1 FROM postgres.public.refeicoes WHERE arranchamentos.refeicao_id = refeicoes.id AND refeicoes.data <= ?)";
+                "AND EXISTS (SELECT 1 FROM postgres.public.refeicoes WHERE arranchamentos.refeicao_id = refeicoes.id AND refeicoes.data BETWEEN ? AND ?)";
+
         try (Connection conexao = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conexao.prepareStatement(sql)) {
 
             pstmt.setInt(1, usuarioId);
-            pstmt.setDate(2, new java.sql.Date(cal.getTimeInMillis())); // Usando a data atual + 7 dias
+            pstmt.setDate(2, new java.sql.Date(proximaSegunda.getTime())); // Data de início
+            pstmt.setDate(3, new java.sql.Date(dataFim.getTime())); // Data de fim
 
             int affectedRows = pstmt.executeUpdate();
+            logger.log(Level.INFO, "Número de linhas afetadas: {0}", affectedRows);
             return affectedRows > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao deletar arranchamentos", e);
             return false;
         }
     }
+
 
     public List<Integer> top10UsuariosArranchadosIds() {
         List<Integer> top10UsuariosIds = new ArrayList<>();
