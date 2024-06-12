@@ -44,8 +44,10 @@ public class MenuServlet extends HttpServlet {
             int user_id = (int) session.getAttribute("usuarioLogado");
 
             List<String> arranchamentosHoje = menuService.obterArranchamentoHoje(dataHoje, user_id);
+            int faltasUsuario = menuService.obterFaltas(user_id);
             responseData.put("arranchamentosHoje", arranchamentosHoje);
             responseData.put("usuario_id", user_id);
+            responseData.put("faltasUsuario", faltasUsuario);
 
             Gson gson = new Gson();
             String jsonResponse = gson.toJson(responseData);

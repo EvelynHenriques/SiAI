@@ -63,6 +63,10 @@ public class MenuService {
         return resultado;
     }
 
+    public int obterFaltas(int userId) {
+        return usuarioDAO.userFaltas(userId);
+    }
+
     public void atualizarDadosUsuarios() {
         initializeUsuarioMap(); 
     }

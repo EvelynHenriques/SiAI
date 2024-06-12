@@ -214,8 +214,8 @@ public class ArranchamentoDAO {
         return arranchamentos;
     }
 
-    public boolean atualizarArranchamento(Arranchamento arranchamento) {
-        String sql = "UPDATE postgres.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+    public boolean atualizarPresencaArranchamento(Arranchamento arranchamento) {
+        String sql = "UPDATE postgres.public.arranchamentos SET updated_at = CURRENT_TIMESTAMP, presenca = true WHERE id = ?";
         try (Connection conn = ConexaoBanco.obterConexao();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, arranchamento.getId());

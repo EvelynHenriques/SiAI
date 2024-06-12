@@ -46,7 +46,16 @@ public class FaltasService {
         // Lógica adicional para processar as informações de refeição, se necessário
         if (!arranchamentos.isEmpty()) {
             System.out.println("Received meal info: userId=" + userId + ", mealType=" + mealType + ", date=" + date);
-            return arranchamentos.get(0);// Retorne true se a operação foi bem-sucedida
+            Arranchamento arranchamento = arranchamentos.get(0);
+            if(!arranchamento.getPresenca()){
+                boolean falta = arranchamentoDAO.atualizarPresencaArranchamento(arranchamento);
+                if (falta) {
+                    System.out.println("FALTA RETIRADA");
+                } else {
+                    System.out.println("Erro ao atualizar banco");
+                }
+            }
+            return arranchamento;// Retorne true se a operação foi bem-sucedida
         } else {
             System.out.println("No meal info found for userId=" + userId + ", mealType=" + mealType + ", date=" + date);
             return null; // Retorne false se nenhuma informação de refeição for encontrada
