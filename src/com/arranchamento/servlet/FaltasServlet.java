@@ -1,5 +1,6 @@
 package arranchamento.servlet;
 
+import arranchamento.modelo.Arranchamento;
 import arranchamento.service.FaltasService;
 
 import javax.servlet.ServletException;
@@ -54,14 +55,18 @@ public class FaltasServlet extends HttpServlet {
         try {
             int userId = Integer.parseInt(userIdStr);
             System.out.println("Debug: user_id parsed successfully = " + userId);
-            boolean result = faltasService.sendMealInfo(userId, mealType, date);
+            Arranchamento result = faltasService.sendMealInfo(userId, mealType, date);
             System.out.println("Debug: sendMealInfo result = " + result);
 
             String jsonResponse;
-            if (result) {
-                jsonResponse = "{\"success\":true, \"message\":\"Arranchamento encontrado, falta tirada com sucesso\"}";
+            if (result != null){
+                if (result.getPresenca()) {
+                    jsonResponse = "{\"success\":true, \"message\":\"Falta já tirada previamente\"}";
+                } else {
+                    jsonResponse = "{\"success\":true, \"message\":\"Arranchamento encontrado, falta tirada com sucesso\"}";
+                }
             } else {
-                jsonResponse = "{\"success\":false, \"message\":\"Arranchamento não encontrado\"}";
+                jsonResponse = "{\"success\":true, \"message\":\"Arranchamento não encontrado\"}";
             }
 
             out.print(jsonResponse);

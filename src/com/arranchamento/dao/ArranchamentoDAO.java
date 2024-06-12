@@ -139,6 +139,7 @@ public class ArranchamentoDAO {
                 arr.setRefeicaoId(rs.getInt("refeicao_id"));
                 arr.setData(rs.getDate("data"));
                 arr.setTipoRefeicao(rs.getString("tipo"));
+                arr.setPresenca(rs.getBoolean("presenca"));
                 arranchamentos.add(arr);
                 //System.out.println(arr.getTipoRefeicao() + arr.getData());
             }
@@ -174,6 +175,7 @@ public class ArranchamentoDAO {
                 arr.setRefeicaoId(rs.getInt("refeicao_id"));
                 arr.setData(rs.getDate("data"));
                 arr.setTipoRefeicao(rs.getString("tipo"));
+                arr.setPresenca(rs.getBoolean("presenca"));
                 arranchamentos.add(arr);
             }
         } catch (SQLException | ParseException e) {
@@ -203,6 +205,7 @@ public class ArranchamentoDAO {
                 arr.setRefeicaoId(rs.getInt("refeicao_id"));
                 arr.setData(rs.getDate("data"));
                 arr.setTipoRefeicao(rs.getString("tipo"));
+                arr.setPresenca(rs.getBoolean("presenca"));
                 arranchamentos.add(arr);
             }
         } catch (SQLException e) {
