@@ -10,7 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="add faltas">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_06_2024_11_28__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_06_2024_11_28__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/modelo/Arranchamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/modelo/Arranchamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/modelo/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/modelo/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/FaltasService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/FaltasService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/FaltasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/FaltasServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

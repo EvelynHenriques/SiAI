@@ -8,6 +8,7 @@ public class Arranchamento {
     private int refeicaoId;
     private Date data;
     private String tipoRefeicao;
+    private boolean presenca;
     public int getId() {
         return id;
     }
@@ -39,4 +40,12 @@ public class Arranchamento {
     public String getTipoRefeicao() {return tipoRefeicao;}
 
     public void setTipoRefeicao(String tipoRefeicao) {this.tipoRefeicao = tipoRefeicao;}
+
+    public boolean getPresenca() {
+        return presenca;
+    }
+
+    public void setPresenca(boolean presenca) {
+        this.presenca = presenca;
+    }
 }

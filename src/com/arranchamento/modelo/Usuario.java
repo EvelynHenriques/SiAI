@@ -10,6 +10,8 @@ public class Usuario {
     private int turma;
     private int pelotao;
 
+    private int faltas;
+
 
 
 
@@ -83,6 +85,14 @@ public class Usuario {
     public int getPelotao() { return pelotao; }
     public void setPelotao(int pelotao) {
         this.pelotao = pelotao;
+    }
+
+    public int getFaltas() {
+        return faltas;
+    }
+
+    public void setFaltas(int faltas) {
+        this.faltas = faltas;
     }
 
 }

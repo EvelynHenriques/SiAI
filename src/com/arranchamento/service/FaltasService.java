@@ -28,7 +28,7 @@ public class FaltasService {
         }
     }
 
-    public boolean sendMealInfo(int userId, String mealType, String date) {
+    public Arranchamento sendMealInfo(int userId, String mealType, String date) {
         // Converta a string date para java.sql.Date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date sqlDate;
@@ -37,7 +37,7 @@ public class FaltasService {
             sqlDate = new java.sql.Date(utilDate.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
-            return false; // Retorne false se a data estiver no formato incorreto
+            return null; // Retorne false se a data estiver no formato incorreto
         }
 
         // Chame o método buscarArranchamentosPorUsuarioTipoEData
@@ -46,10 +46,10 @@ public class FaltasService {
         // Lógica adicional para processar as informações de refeição, se necessário
         if (!arranchamentos.isEmpty()) {
             System.out.println("Received meal info: userId=" + userId + ", mealType=" + mealType + ", date=" + date);
-            return true; // Retorne true se a operação foi bem-sucedida
+            return arranchamentos.get(0);// Retorne true se a operação foi bem-sucedida
         } else {
             System.out.println("No meal info found for userId=" + userId + ", mealType=" + mealType + ", date=" + date);
-            return false; // Retorne false se nenhuma informação de refeição for encontrada
+            return null; // Retorne false se nenhuma informação de refeição for encontrada
         }
     }
 }
