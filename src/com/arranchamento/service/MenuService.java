@@ -67,6 +67,29 @@ public class MenuService {
         return usuarioDAO.userFaltas(userId);
     }
 
+    public List<String> obterRefeicoesFaltas(int userId) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        RefeicaoDAO refeicaoDAO = new RefeicaoDAO();
+
+        List<Integer> listaRefeicaoIds = usuarioDAO.getFaltasRefeicaoIds(userId);
+        List<String> listaDataTipo = new ArrayList<>();
+
+        // Processar IDs em batches
+        int batchSize = 50; // Tamanho do batch
+        for (int i = 0; i < listaRefeicaoIds.size(); i += batchSize) {
+            int end = Math.min(listaRefeicaoIds.size(), i + batchSize);
+            List<Integer> batchList = listaRefeicaoIds.subList(i, end);
+            String[] dataTipoArray = refeicaoDAO.buscarDataTipoPorIds(batchList);
+
+            // Adicionar cada data_tipo na lista final
+            for (String dataTipo : dataTipoArray) {
+                listaDataTipo.add(dataTipo);
+            }
+        }
+
+        return listaDataTipo;
+    }
+
     public void atualizarDadosUsuarios() {
         initializeUsuarioMap(); 
     }

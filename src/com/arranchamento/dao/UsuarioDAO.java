@@ -136,6 +136,43 @@ public class UsuarioDAO {
         return false;
     }
 
+    public List<Integer> getFaltasRefeicaoIds(int userId) {
+        String sql = "SELECT arr.refeicao_id " +
+                "FROM postgres.public.arranchamentos arr " +
+                "JOIN postgres.public.usuarios usr " +
+                "ON arr.usuario_id = usr.id " +
+                "WHERE usr.id = ? AND arr.presenca = false";
+
+        List<Integer> refeicaoIds = new ArrayList<>();
+
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+
+            // Logging the connection and parameter setup
+            System.out.println("Conexão com o banco de dados estabelecida.");
+            pstmt.setInt(1, userId);
+            System.out.println("PreparedStatement configurado com userId: " + userId);
+
+            // Execute the query
+            try (ResultSet rs = pstmt.executeQuery()) {
+                System.out.println("Executando query...");
+                while (rs.next()) {
+                    int refeicaoId = rs.getInt("refeicao_id");
+                    refeicaoIds.add(refeicaoId);
+                }
+            }
+
+            // Logging the results
+            System.out.println("Total de refeicoes encontradas: " + refeicaoIds.size());
+        } catch (SQLException e) {
+            // Log e tratamento de exceção adequado
+            System.err.println("Erro ao executar query: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return refeicaoIds;
+    }
+
     public int userFaltas(int userId) {
         String sql = "SELECT faltas FROM postgres.public.usuarios WHERE id = ?";
         try (Connection conexao = ConexaoBanco.obterConexao();

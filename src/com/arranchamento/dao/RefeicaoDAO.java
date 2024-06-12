@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RefeicaoDAO {
 
@@ -103,5 +105,85 @@ public class RefeicaoDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public String[] buscarDataTipoPorIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return new String[0];
+        }
+
+        // Obter a data de hoje
+        String todayDate = getTodayDate();
+
+        // Construindo a cláusula IN para a query SQL com a condição de data
+        StringBuilder sql = new StringBuilder("SELECT data, tipo FROM postgres.public.refeicoes WHERE id IN (");
+        for (int i = 0; i < ids.size(); i++) {
+            sql.append("?");
+            if (i < ids.size() - 1) {
+                sql.append(",");
+            }
+        }
+        sql.append(") AND data < ?::date");
+
+        List<String> dataTipos = new ArrayList<>();
+        try (Connection conexao = ConexaoBanco.obterConexao();
+             PreparedStatement pstmt = conexao.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < ids.size(); i++) {
+                pstmt.setInt(i + 1, ids.get(i));
+            }
+
+            // Definir a data de hoje como parâmetro
+            pstmt.setString(ids.size() + 1, todayDate);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String data = rs.getString("data");
+                String tipo = rs.getString("tipo");
+                String dataTipo = formatDataTipo(data, tipo);
+                dataTipos.add(dataTipo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dataTipos.toArray(new String[0]);
+    }
+
+    private String formatDataTipo(String data, String tipo) {
+        String formattedDate = formatDate(data);
+        String formattedTipo = formatTipo(tipo);
+        return formattedDate + "_" + formattedTipo;
+    }
+
+    private String formatDate(String date) {
+        try {
+            SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            return sdfOutput.format(sdfInput.parse(date));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return date;
+        }
+    }
+
+    private String formatTipo(String tipo) {
+        switch (tipo.toLowerCase()) {
+            case "cafe":
+                return "Café";
+            case "almoco":
+                return "Almoço";
+            case "janta":
+                return "Janta";
+            case "ceia":
+                return "Ceia";
+            default:
+                return tipo;
+        }
+    }
+
+    private String getTodayDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return sdf.format(new java.util.Date());
     }
 }

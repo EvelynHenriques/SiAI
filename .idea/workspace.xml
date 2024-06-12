@@ -9,8 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="arranchamento fix">
+    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="a">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/MenuServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/MenuServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master2" />
+        <entry key="$PROJECT_DIR$" value="fragments" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,7 +101,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
@@ -123,7 +129,7 @@
   <component name="RunDashboard">
     <option name="openRunningConfigInTab" value="true" />
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.87">
+  <component name="RunManager" selected="Application.ConexaoBancoTeste">
     <configuration name="ConexaoBancoTeste" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arranchamento.siai.ConexaoBancoTeste" />
       <module name="SiAI" />
@@ -137,8 +143,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tomcat 9.0.87" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.87" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+    <configuration name="Tomcat 9.0.87" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.87" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="SiAI:war exploded">
           <settings>
@@ -147,7 +153,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="80670af1-2ebe-466a-b1eb-447570b5714c" />
+        <option name="BASE_DIRECTORY_NAME" value="5f1753b6-6f22-4bac-be78-208edb89e811" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -155,7 +161,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="59015" />
+        <option name="DEBUG_PORT" value="51076" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -228,11 +234,6 @@
       <item itemvalue="Application.ConexaoBancoTeste" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.87" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.ConexaoBancoTeste" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -273,7 +274,10 @@
       <workItem from="1718022716388" duration="10000" />
       <workItem from="1718105717682" duration="4265000" />
       <workItem from="1718116052330" duration="27957000" />
-      <workItem from="1718190775532" duration="5313000" />
+      <workItem from="1718190775532" duration="11315000" />
+      <workItem from="1718212917973" duration="4962000" />
+      <workItem from="1718229097689" duration="497000" />
+      <workItem from="1718229608985" duration="1324000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -403,7 +407,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718193380628</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="a">
+      <option name="closed" value="true" />
+      <created>1718197306295</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1718197306295</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,10 +455,14 @@
     <MESSAGE value="aaaaaaaaaa" />
     <MESSAGE value="add faltas" />
     <MESSAGE value="arranchamento fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="arranchamento fix" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SiAI$Tomcat_9_0_87.ic" NAME="Tomcat 9.0.87 Coverage Results" MODIFIED="1718229765590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
