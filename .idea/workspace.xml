@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="add faltas">
+    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="arranchamento fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/ArranchamentoDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +273,7 @@
       <workItem from="1718022716388" duration="10000" />
       <workItem from="1718105717682" duration="4265000" />
       <workItem from="1718116052330" duration="27957000" />
-      <workItem from="1718190775532" duration="2284000" />
+      <workItem from="1718190775532" duration="5313000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
@@ -396,7 +395,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718144196575</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="arranchamento fix">
+      <option name="closed" value="true" />
+      <created>1718193380628</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1718193380628</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +442,8 @@
     <MESSAGE value="add menu endpoint" />
     <MESSAGE value="aaaaaaaaaa" />
     <MESSAGE value="add faltas" />
-    <option name="LAST_COMMIT_MESSAGE" value="add faltas" />
+    <MESSAGE value="arranchamento fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="arranchamento fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
