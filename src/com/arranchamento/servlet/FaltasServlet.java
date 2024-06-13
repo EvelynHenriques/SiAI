@@ -24,8 +24,9 @@ public class FaltasServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String sessionId = req.getParameter("sessionId");
-        boolean isAdmin = faltasService.checkAdmin(sessionId);
+        String userId = req.getParameter("userId");
+        System.out.println("userId recebido no endpoint: " + userId);
+        boolean isAdmin = faltasService.checkAdmin(userId);
         System.out.println(isAdmin);
 
         resp.setContentType("application/json");

@@ -9,14 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="a">
+    <list default="true" id="2dd2b23a-e216-4363-9937-cf65bd2e00f8" name="Changes" comment="add um monte de coisa">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f3f5acbe-d33c-47a5-b33a-f4e97d050f72/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/RefeicaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/dao/UsuarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/MenuService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/MenuServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/MenuServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/service/FaltasService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/service/FaltasService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/arranchamento/servlet/FaltasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/arranchamento/servlet/FaltasServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +126,7 @@
   <component name="RunDashboard">
     <option name="openRunningConfigInTab" value="true" />
   </component>
-  <component name="RunManager" selected="Application.ConexaoBancoTeste">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.87">
     <configuration name="ConexaoBancoTeste" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arranchamento.siai.ConexaoBancoTeste" />
       <module name="SiAI" />
@@ -278,6 +275,8 @@
       <workItem from="1718212917973" duration="4962000" />
       <workItem from="1718229097689" duration="497000" />
       <workItem from="1718229608985" duration="1324000" />
+      <workItem from="1718277869818" duration="700000" />
+      <workItem from="1718282246038" duration="1413000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />

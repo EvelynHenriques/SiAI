@@ -17,11 +17,11 @@ public class FaltasService {
         arranchamentoDAO = new ArranchamentoDAO();
     }
 
-    public boolean checkAdmin(String sessionId) {
-        System.out.println("checkadmin - sessionId: " + sessionId);
+    public boolean checkAdmin(String userId) {
+        System.out.println("checkadmin - userId: " + userId);
         try {
-            int userId = Integer.parseInt(sessionId);
-            return usuarioDAO.isUserAdmin(userId);
+            int userIdInt = Integer.parseInt(userId);
+            return usuarioDAO.isUserAdmin(userIdInt);
         } catch (NumberFormatException e) {
             e.printStackTrace();
             return false;
